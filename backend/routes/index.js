@@ -13,5 +13,9 @@ router.get('/about', function(req, res, next) {
 router.get('/contact', function(req, res, next) {
   res.render('contact', { });
 });
+/* GET chat page. */
+router.get('/chat', function(req, res, next) {
+  res.render('chat', { });
+});
 
 module.exports = router;
