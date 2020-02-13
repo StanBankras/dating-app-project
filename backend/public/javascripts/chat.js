@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     let feedback = $("#text-feedback");
     let typing = $("#typing");
+    let changedName = $("#changed-name");
     let message = $("#message");
     let sendMessage = $("#send-button");
 
@@ -21,6 +22,7 @@ $(document).ready(function() {
 
     changeUsername.click(() => {
         socket.emit('change_username', { username: username.val() });
+        changedName.text('Changed name to ' + username.val());
     });
 
     message.bind('keypress', () => {
