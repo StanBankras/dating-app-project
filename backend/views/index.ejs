@@ -1,7 +1,25 @@
-<div><b>Index page</b></div>
-<ul>
-  <li><a href="/about">About</a></li>
-  <li><a href="/contact">Contact</a></li>
-  <li><a href="/">Index</a></li>
-</ul>
-<img src="/images/logo.png" alt="">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div><b>Index page</b></div>
+  <ul>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/">Index</a></li>
+  </ul>    
+  <% for(let i = 0; i < posts.length; i++) { %>
+    <article>
+        <h2><%= posts[i].title %></h1>
+          <p><%= posts[i].body %></p>
+          <p><%= posts[i].author %></p>
+          <p><%= posts[i].publishedAt %></p>
+          <p><%= posts[i].createdAt %></p>
+    </article>
+  <% } %>
+  <img src="/images/logo.png" alt="">
+</body>
+</html>
