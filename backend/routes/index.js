@@ -29,19 +29,28 @@ router.get('/', function(req, res, next) {
 ];
   res.render('index', { posts: blogPosts });
 });
+
 /* GET about page. */
-router.get('/about', function(req, res, next) {
+router.get('/about', (req, res, next) => {
   res.render('about', { });
 });
+
 /* GET contact page. */
-router.get('/contact', function(req, res, next) {
+router.get('/contact', (req, res, next) => {
   res.render('contact', { });
 });
+
 /* GET chat page. */
-router.get('/chat', function(req, res, next) {
+router.get('/chat', (req, res, next) => {
   res.render('chat', { });
 });
-router.get("/mp3", function(req, res, next) {
+
+// Dynamic route with params
+router.get('/profile/:id', (req, res, next) => {
+  res.send('You requested to see a profile with the id of ' + req.params.id);
+});
+
+router.get("/mp3", (req, res, next) => {
   console.log(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
   res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
  });
