@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -40,5 +41,8 @@ router.get('/contact', function(req, res, next) {
 router.get('/chat', function(req, res, next) {
   res.render('chat', { });
 });
-
+router.get("/mp3", function(req, res, next) {
+  console.log(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
+ });
 module.exports = router;
