@@ -1,10 +1,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dating app feature</title>
     <link href="https://fonts.googleapis.com/css?family=ABeeZee|Merienda&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font awesome kit -->
+    <script src="https://kit.fontawesome.com/bc672c1724.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -16,20 +19,31 @@
 
     <main>
         <article>
-            <section class="container">
+            <section class="container" id="matches">
                 <h1>Your matches</h1>
-                <ul id="matches">
+                <ul>
                     <li>
                         <figure>
-                            <img src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg" alt="Dating person">
+                            <img class="profile-picture" src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg" alt="Dating person">
                             <figcaption>Mark de Jong, 26</figcaption>
                         </figure>
                         <div class="hearts">
-                            <img src="img/dislike.png" alt="">
-                            <img src="img/like.png" alt="">
+                            <img class="dislike" src="img/dislike.png" alt="">
+                            <img class="like" src="img/like.png" alt="">
                         </div>
                     </li>
                 </ul>
+                <nav class="slider-nav">
+                    <i class="fas fa-arrow-circle-left"></i>
+                    <i class="fas fa-arrow-alt-circle-left"></i>
+                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle"></i>  
+                    <i class="far fa-circle"></i>  
+                    <i class="fas fa-circle"></i>      
+                    <i class="far fa-circle"></i>  
+                    <i class="far fa-circle"></i>   
+                    <i class="fas fa-arrow-alt-circle-right"></i>               
+                </nav>
             </section>
             <section>
                 <div class="container">

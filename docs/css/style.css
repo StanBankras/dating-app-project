@@ -4,14 +4,16 @@
 *
 */
 :root {
-  --main-color: #F2059F;
-  --secondary-color: #F21D81;
-  --accent-color: #F2778D;
-  --dark-skin-tone: #F29F8D;
-  --light-skin-tone: #FEBC93;
+  --main-color: #f2059f;
+  --secondary-color: #f21d81;
+  --accent-color: #f2778d;
+  --dark-skin-tone: #f29f8d;
+  --light-skin-tone: #febc93;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
@@ -40,7 +42,7 @@ header {
       -ms-flex-align: center;
           align-items: center;
   padding: 1rem 2rem;
-  background-color: #F2059F;
+  background-color: #f2059f;
   color: white;
 }
 
@@ -63,4 +65,55 @@ header a {
 *   Your matches page
 *
 */
+#matches {
+  padding: 1rem 0;
+}
+
+#matches ul {
+  list-style: none;
+}
+
+#matches ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 1rem;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#matches ul li figure {
+  padding: 1rem;
+}
+
+#matches ul li figure img.profile-picture {
+  border-radius: 50%;
+  width: 150px;
+}
+
+#matches ul li figure figcaption {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+#matches ul .hearts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: var(--light-skin-tone);
+}
+
+#matches ul .hearts .like {
+  margin-left: auto;
+}
 /*# sourceMappingURL=style.css.map */
