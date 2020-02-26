@@ -1,0 +1,66 @@
+/* 
+*
+*   Set defaults
+*
+*/
+:root {
+  --main-color: #F2059F;
+  --secondary-color: #F21D81;
+  --accent-color: #F2778D;
+  --dark-skin-tone: #F29F8D;
+  --light-skin-tone: #FEBC93;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "ABeeZee";
+}
+
+/* 
+*
+*   Main layout styling
+*
+*/
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+header {
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 2rem;
+  background-color: #F2059F;
+  color: white;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: block;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.container {
+  margin: 0 2rem;
+}
+
+/* 
+*
+*   Your matches page
+*
+*/
+/*# sourceMappingURL=style.css.map */
