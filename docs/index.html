@@ -7,14 +7,16 @@
     <link href="https://fonts.googleapis.com/css?family=ABeeZee|Merienda&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
     <!-- Font awesome kit -->
-    <script src="https://kit.fontawesome.com/bc672c1724.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous" />
 </head>
 <body>
     <header>
-        <a href="#">
-            <i><</i>
-            <span>Back</span>
-        </a>
+        <div class="container">
+            <a href="#">
+                <i><</i>
+                <span>Back</span>
+            </a>
+        </div>
     </header>
 
     <main>
@@ -32,17 +34,38 @@
                             <img class="like" src="img/like.png" alt="">
                         </div>
                     </li>
+                    <li>
+                        <figure>
+                            <img class="profile-picture" src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg" alt="Dating person">
+                            <figcaption>Mark de Jong, 26</figcaption>
+                        </figure>
+                        <div class="hearts">
+                            <img class="dislike" src="img/dislike.png" alt="">
+                            <img class="like" src="img/like.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <figure>
+                            <img class="profile-picture" src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg" alt="Dating person">
+                            <figcaption>Mark de Jong, 26</figcaption>
+                        </figure>
+                        <div class="hearts">
+                            <img class="dislike" src="img/dislike.png" alt="">
+                            <img class="like" src="img/like.png" alt="">
+                        </div>
+                    </li>
                 </ul>
                 <nav class="slider-nav">
-                    <i class="fas fa-arrow-circle-left"></i>
-                    <i class="fas fa-arrow-alt-circle-left"></i>
-                    <i class="far fa-circle"></i>
-                    <i class="far fa-circle"></i>  
-                    <i class="far fa-circle"></i>  
-                    <i class="fas fa-circle"></i>      
-                    <i class="far fa-circle"></i>  
-                    <i class="far fa-circle"></i>   
-                    <i class="fas fa-arrow-alt-circle-right"></i>               
+                    <div class="wrap">
+                        <i class="material-icons arrows">arrow_back_ios</i>
+                        <i class="material-icons">panorama_fish_eye</i>
+                        <i class="material-icons">panorama_fish_eye</i>
+                        <i class="material-icons">panorama_fish_eye</i>
+                        <i class="material-icons active">lens</i>         
+                        <i class="material-icons">panorama_fish_eye</i>
+                        <i class="material-icons">panorama_fish_eye</i>   
+                        <i class="material-icons arrows">arrow_forward_ios</i>
+                    </div>
                 </nav>
             </section>
             <section id="viewed-matches">
@@ -71,13 +94,13 @@
         <nav>
             <ul>
                 <li>
-                    <a href="#"><img src="img/person.png" alt="Person"></a>
+                    <a href="#"><img src="img/person.png" alt="Person"><span class="footernav-text">Profile</span></a>
                 </li>
                 <li>
-                    <a href="#"><img src="img/home.png" alt="Home"></a>
+                    <a href="#"><img src="img/home.png" alt="Home"><span class="footernav-text">Home</span></a>
                 </li>
                 <li>
-                    <a href="#"><img src="img/chat.png" alt="Chat"></a>
+                    <a href="#"><img src="img/chat.png" alt="Chat"><span class="footernav-text">Chats</span></a>
                 </li>
             </ul>
         </nav>
