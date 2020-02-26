@@ -48,7 +48,6 @@ body {
 
 main {
   min-height: calc(100vh - 60px);
-  margin-bottom: 60px;
 }
 
 header {
@@ -66,11 +65,17 @@ header {
     display: block;
     align-self: center;
   }
+  h1 {
+	  font-size: 20px;
+  }
 }
 
 .container {
   margin: 0 2rem;
   max-width: 1200px;
+  &.fluid {
+	  margin: 0;
+  }
 }
 
 #mobile-nav {
@@ -92,10 +97,10 @@ header {
       li {
         display: flex;
         justify-content: center;
-        padding: 1rem;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 		  transition: 0.2s;
 		  a {
+				padding: 1rem 2rem;
 			  display: flex;
 			  align-items: center;
 			  text-decoration: none;
@@ -228,17 +233,119 @@ header {
 
 /* 
 *
+*   Chat list page
+*
+*/
+
+#chat-list {
+	.chat-item a {
+		text-decoration: none;
+		color: #6e6e6e;
+		cursor: pointer;
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		padding: 0.5rem;
+		align-items: center;
+		border: 2px solid var(--main-color);
+		img {
+			width: 50px;
+			border-radius: 50%;
+			margin-right: 1rem;
+		}
+		i.material-icons {
+			margin-left: auto;
+			max-width: 24px;
+		}
+	}
+}
+
+/* 
+*
+*   Individual chat page
+*
+*/
+
+#messages {
+	.container {
+		max-width: 600px !important;
+		margin: 0 auto;
+		background-color: white;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		height: 80vh;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+		padding: 2rem;
+		p {
+			font-size: 14px;
+			max-width: minmax(70%, 200px);
+			padding: 0.7rem;
+			border-radius: 10px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			margin: 0.5rem 0;
+			&:last-child {
+				margin-bottom: 60px;
+			}
+			&.outgoing {
+				align-self: flex-end;
+			}
+			&.incoming {
+				background-color: var(--main-color);
+				color: white;
+				align-self: flex-start;
+			}
+		}
+	}
+	.input-field {
+		position: fixed;
+		bottom: 61px;
+		width: 100%;
+		padding: 0.5rem;
+		max-width: 600px;
+		margin: 0 auto;
+		background-color: var(--secondary-color);
+		fieldset {
+			outline: 0;
+			border: 0;
+			input {
+				width: 80%;
+				padding: 0.5rem;
+				border-radius: 10px;
+				border: 0;
+			}
+			button {
+				outline: none;
+				border: 0;
+				padding: 0.5rem;
+				width: 15%;
+				border-radius: 10px;
+				background-color: white;
+				color: var(--main-color);
+			}
+		}
+	}
+}
+
+/* 
+*
 *   Media queries
 *
 */
 
 @media (min-width: 550px) {
-  .container {
-    margin: 0 15%;
-  }
-}
+	.container, .fluid.container {
+	  margin: 0 15%;
+	}
+ }
+ @media (min-width: 600px) {
+	.input-field {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+ }
 @media (min-width: 768px) {
-  .container {
+  .container, .fluid.container {
     margin: 0 20%;
   }
   #matches h1 {
