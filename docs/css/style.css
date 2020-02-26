@@ -21,6 +21,18 @@
   font-family: "ABeeZee";
 }
 
+h1 {
+  font-size: 1.7rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+ul {
+  list-style: none;
+}
+
 /* 
 *
 *   Main layout styling
@@ -60,6 +72,45 @@ header a {
   margin: 0 2rem;
 }
 
+#mobile-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
+  z-index: 1000;
+}
+
+#mobile-nav nav ul {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+}
+
+#mobile-nav nav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 1rem;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+#mobile-nav nav ul li:hover, #mobile-nav nav ul li:active {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+#mobile-nav nav ul li:hover img, #mobile-nav nav ul li:active img {
+  -webkit-filter: brightness(100);
+          filter: brightness(100);
+}
+
 /* 
 *
 *   Your matches page
@@ -67,10 +118,6 @@ header a {
 */
 #matches {
   padding: 1rem 0;
-}
-
-#matches ul {
-  list-style: none;
 }
 
 #matches ul li {
@@ -115,5 +162,80 @@ header a {
 
 #matches ul .hearts .like {
   margin-left: auto;
+}
+
+#matches ul .hearts img {
+  cursor: pointer;
+}
+
+#matches ul .hearts img:hover {
+  -webkit-animation: heartHover 1s ease infinite;
+          animation: heartHover 1s ease infinite;
+}
+
+#viewed-matches {
+  background-color: var(--secondary-color);
+  padding: 1rem 0;
+  color: white;
+}
+
+#viewed-matches h2 {
+  margin-bottom: 1rem;
+}
+
+#viewed-matches li {
+  padding: 0.7rem;
+  background-color: white;
+  color: black;
+  border: 1px solid var(--secondary-color);
+}
+
+#viewed-matches li figure {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#viewed-matches li figure img {
+  margin-right: 1rem;
+  border-radius: 50%;
+  width: 40px;
+}
+
+/* 
+*
+*   Animation keyframes
+*
+*/
+@-webkit-keyframes heartHover {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes heartHover {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
 /*# sourceMappingURL=style.css.map */

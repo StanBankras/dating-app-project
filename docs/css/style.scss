@@ -20,6 +20,10 @@
   box-sizing: border-box;
   font-family: "ABeeZee";
 }
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.3rem; }
+
+ul { list-style: none; }
 
 /* 
 *
@@ -53,6 +57,34 @@ header {
   margin: 0 2rem;
 }
 
+#mobile-nav {
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	background-color: white;
+	z-index: 1000;
+	nav {
+		ul {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			li {
+				display: flex;
+				justify-content: center;
+				padding: 1rem;
+				box-shadow: 0 0 3px rgba(0,0,0,0.1);
+				transition: .2s;
+				&:hover, &:active {
+					cursor: pointer;
+					background-color: var(--secondary-color);
+					img {
+						filter: brightness(100);
+					}
+				}
+			}
+		}
+	}
+}
+
 /* 
 *
 *   Your matches page
@@ -62,7 +94,6 @@ header {
 #matches {
   padding: 1rem 0;
   ul {
-    list-style: none;
     li {
       display: flex;
       flex-wrap: wrap;
@@ -91,7 +122,55 @@ header {
       background-color: var(--light-skin-tone);
       .like {
         margin-left: auto;
-      }
+		}
+		img {
+			cursor: pointer;
+			&:hover {
+				animation: heartHover 1s ease infinite;
+			}
+		}
     }
   }
+}
+
+#viewed-matches {
+	background-color: var(--secondary-color);
+	padding: 1rem 0;
+	color: white;
+	h2 {
+		margin-bottom: 1rem;
+	}
+	li {
+		padding: 0.7rem;
+		background-color: white;
+		color: black;
+		border: 1px solid var(--secondary-color);
+		figure {
+			display: flex;
+			align-items: center;
+			img {
+				margin-right: 1rem;
+				border-radius: 50%;
+				width: 40px;
+			}
+		}
+	}
+}
+
+/* 
+*
+*   Animation keyframes
+*
+*/
+
+@keyframes heartHover {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
