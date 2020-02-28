@@ -284,18 +284,20 @@ header {
 			border-radius: 10px;
 			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 			margin: 0.5rem 0;
-			&:last-child {
-				margin-bottom: 60px;
-			}
-			&.outgoing {
-				align-self: flex-end;
-			}
-			&.incoming {
-				background-color: var(--main-color);
-				color: white;
-				align-self: flex-start;
-			}
-		}
+    }
+    div:last-child {
+      margin-bottom: 60px;
+    }
+    .outgoing {
+      align-self: flex-end;
+    }
+    .incoming {
+      p {
+        background-color: var(--main-color);
+        color: white;
+      }
+      align-self: flex-start;
+    }
 	}
 	.input-field {
 		position: fixed;

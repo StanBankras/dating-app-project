@@ -374,20 +374,23 @@ header h1 {
   margin: 0.5rem 0;
 }
 
-#messages .container p:last-child {
+#messages .container div:last-child {
   margin-bottom: 60px;
 }
 
-#messages .container p.outgoing {
+#messages .container .outgoing {
   -ms-flex-item-align: end;
       align-self: flex-end;
 }
 
-#messages .container p.incoming {
-  background-color: var(--main-color);
-  color: white;
+#messages .container .incoming {
   -ms-flex-item-align: start;
       align-self: flex-start;
+}
+
+#messages .container .incoming p {
+  background-color: var(--main-color);
+  color: white;
 }
 
 #messages .input-field {
