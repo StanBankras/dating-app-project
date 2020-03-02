@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const slug = require('slug');
+const bodyParser = require('body-parser');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,6 +45,37 @@ router.get('/contact', (req, res, next) => {
 /* GET chat page. */
 router.get('/chat', (req, res, next) => {
   res.render('chat', { });
+});
+
+/* GET add page. */
+router.get('/add', (req, res, next) => {
+  res.render('add', { });
+});
+
+let movies = [
+  {
+      title: 'Titanic',
+      description: 'This is the titanic',
+  },
+  {
+      title: 'Titanic2',
+      description: 'This is the titanic2',
+  }
+];
+
+/* GET movies page. */
+router.get('/movies', (req, res, next) => {
+  res.render('movies', { movies: movies }) 
+});
+
+router.post('/', (req, res) => {
+  const title = req.body.title;
+  const description = req.body.description;
+  movies.push({
+    title: title,
+    description: description
+  });
+  res.redirect('movies');
 });
 
 // Dynamic route with params

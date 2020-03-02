@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="stylesheets/style.css">
+
+<%- include('components/header', {}); %>
+
+<ul>
+    <% for(let i = 0; i < movies.length; i++) { %>
+    <li>
+        <h2><%= movies[i].title %></h1>
+        <p><%= movies[i].description %></p>
+    </li>
+      <% } %>
+
+</ul>
+<a href="/add">Add new movie</a>
+<%- include('components/footer', {}); %>
