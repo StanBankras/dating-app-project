@@ -10,35 +10,37 @@
     <article>
       <section class="container" id="matches">
         <h1>Your matches</h1>
-        <ul>
-          <% for(let i=0;i < matches.length;i++) { %>
-          <li>
-            <figure>
-              <div class="img-wrapper">
-                <img class="profile-picture"
-                  src="<%= matches[i].picture %>"
-                  alt="Dating person">
+        <div id="match-items">
+          <ul>
+            <% for(let i=0;i < matches.length;i++) { %>
+            <li>
+              <figure>
+                <div class="img-wrapper">
+                  <img class="profile-picture"
+                    src="<%= matches[i].picture %>"
+                    alt="Dating person">
+                </div>
+                <figcaption><%= matches[i].name %> <%= matches[i].lastname %>, <%= matches[i].age %></figcaption>
+              </figure>
+              <div class="hearts">
+                <img class="dislike" src="./images/dislike.png" alt="">
+                <img class="like" src="./images/like.png" alt="">
               </div>
-              <figcaption><%= matches[i].name %> <%= matches[i].lastname %>, <%= matches[i].age %></figcaption>
-            </figure>
-            <div class="hearts">
-              <img class="dislike" src="./images/dislike.png" alt="">
-              <img class="like" src="./images/like.png" alt="">
-            </div>
-          </li>
-          <% } %>
-        </ul>
+            </li>
+            <% } %>
+          </ul>
+        </div>
         <nav class="slider-nav">
           <div class="wrap">
-            <i class="material-icons arrows">arrow_back_ios</i>
-            <% for(let i=0;i < 6;i++) { 
+            <i class="material-icons arrows" id="slide-back">arrow_back_ios</i>
+            <% for(let i=0;i < (matches.length < 6 ? matches.length : 6);i++) { 
               if(false) { %> <!-- TODO: If list item is active, set other icon! -->
               <i class="material-icons">panorama_fish_eye</i>
               <% } else { %>
                 <i class="material-icons">panorama_fish_eye</i>
               <% } %>
             <% } %>
-            <i class="material-icons arrows">arrow_forward_ios</i>
+            <i class="material-icons arrows" id="slide-forward">arrow_forward_ios</i>
           </div>
         </nav>
       </section>
@@ -70,6 +72,7 @@
 
   <%- include('components/footer') %>
 
+  <script src="./javascripts/match-slider.js"></script>
 </body>
 
 </html>

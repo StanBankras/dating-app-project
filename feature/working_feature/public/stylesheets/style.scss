@@ -66,10 +66,12 @@ main {
 
 #matches {
   padding: 1rem 0;
+  #match-items {
+  }
   ul {
     display: flex;
-    overflow-x: auto;
     margin-top: 2rem;
+    transition: .3s ease;
     li {
       display: flex;
       flex-wrap: wrap;
@@ -118,6 +120,7 @@ main {
     }
   }
   .slider-nav {
+    user-select: none;
 	 width: 100%;
 	 margin-top: 1rem;
     .wrap {
