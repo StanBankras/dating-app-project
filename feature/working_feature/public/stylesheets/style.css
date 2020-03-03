@@ -204,10 +204,15 @@ main {
 }
 
 #viewed-matches ul li {
+  cursor: pointer;
   padding: 0.7rem;
   background-color: white;
   color: black;
   border: 1px solid var(--secondary-color);
+}
+
+#viewed-matches ul li * {
+  pointer-events: none;
 }
 
 #viewed-matches ul li figure {
