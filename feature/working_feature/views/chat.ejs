@@ -1,27 +1,56 @@
-<html>
-    <head>
-        <title>Real time chat</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div id="chat-container">
-            <h1>Chat</h1>
+<html lang="en">
 
-            <div id="feedback">
-                <span id="username-feedback"></span> <span id="text-feedback"></span>
+<%- include('defaults/head') %>
+
+<body>
+
+  <%- include('components/header') %>
+
+  <main>
+    <article>
+      <section id="messages">
+        <div class="container">
+          <div class="incoming">
+            <div class="metadata">
+              <span class="author">Rick</span>
+              <span class="date">15:18</span>
             </div>
-            <div id="typing"></div>
-            <br><br>
-            <p>Send a message:</p>
-            <input type="text" id="message">
-            <button type="submit" id="send-button">Send</button>
-            <br><br>
-            <p>Change username:</p>
-            <input type="text" id="username">
-            <button type="submit" id="change-username">Send</button>
-            <p id="changed-name"></p>
+            <p>Message is going to be displayed here.</p>
+          </div>
+          <div class="outgoing">
+            <div class="metadata">
+              <span class="author">You</span>
+              <span class="date">15:19</span>
+            </div>
+            <p>Message is going to be displayed here.</p>
+          </div>
+          <div class="incoming">
+            <div class="metadata">
+              <span class="author">Rick</span>
+              <span class="date">15:18</span>
+            </div>
+            <p>Message is going to be displayed here.</p>
+          </div>
+          <div class="outgoing">
+            <div class="metadata">
+              <span class="author">You</span>
+              <span class="date">15:19</span>
+            </div>
+            <p>Message is going to be displayed here.</p>
+          </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="javascripts/chat.js"></script>        
-    </body>
+        <form class="input-field">
+          <fieldset>
+            <input type="text">
+            <button>Send</button>
+          </fieldset>
+        </form>
+      </section>
+    </article>
+  </main>
+
+  <%- include('components/footer') %>
+
+</body>
+
 </html>

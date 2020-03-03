@@ -1,14 +1,93 @@
-<footer>
-    This is the footer
+<footer id="mobile-nav">
+    <nav>
+        <ul>
+            <li>
+                <a href="#"><img src="./images/person.png" alt="Person"><span class="footernav-text">Profile</span></a>
+            </li>
+            <li>
+                <a href="/"><img src="./images/home.png" alt="Home"><span class="footernav-text">Home</span></a>
+            </li>
+            <li>
+                <a href="/chats"><img src="./images/chat.png" alt="Chat"><span class="footernav-text">Chats</span></a>
+            </li>
+        </ul>
+    </nav>
 </footer>
 
 <style>
-    footer {
-        box-sizing: border-box;
-        width: 100%;
-        padding: 50px;
-        background-color: rgb(0, 132, 255);
-        color: white;
-        margin-bottom: 20px;
-    }
+#mobile-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
+  z-index: 1000;
+  -webkit-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#mobile-nav nav {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#mobile-nav nav ul {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  max-width: 600px;
+  width: 100%;
+}
+
+#mobile-nav nav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+#mobile-nav nav ul li a {
+  padding: 1rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+#mobile-nav nav ul li a img {
+  margin-right: 10px;
+}
+
+#mobile-nav nav ul li:hover, #mobile-nav nav ul li:active {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+#mobile-nav nav ul li:hover img, #mobile-nav nav ul li:active img {
+  -webkit-filter: brightness(100);
+          filter: brightness(100);
+}
+
+#mobile-nav nav ul li:hover a, #mobile-nav nav ul li:active a {
+  color: white;
+}
+
+#mobile-nav .footernav-text {
+  display: none;
+}
 </style>

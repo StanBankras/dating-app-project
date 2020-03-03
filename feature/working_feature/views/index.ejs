@@ -1,25 +1,75 @@
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+
+<%- include('defaults/head') %>
+
 <body>
-  <div><b>Index page</b></div>
-  <ul>
-    <li><a href="/about">About</a></li>
-    <li><a href="/contact">Contact</a></li>
-    <li><a href="/">Index</a></li>
-  </ul>    
-  <% for(let i = 0; i < posts.length; i++) { %>
+
+  <%- include('components/header') %>
+
+  <main>
     <article>
-        <h2><%= posts[i].title %></h1>
-          <p><%= posts[i].body %></p>
-          <p><%= posts[i].author %></p>
-          <p><%= posts[i].publishedAt %></p>
-          <p><%= posts[i].createdAt %></p>
+      <section class="container" id="matches">
+        <h1>Your matches</h1>
+        <ul>
+          <% for(let i=0;i < matches.length;i++) { %>
+          <li>
+            <figure>
+              <div class="img-wrapper">
+                <img class="profile-picture"
+                  src="<%= matches[i].picture %>"
+                  alt="Dating person">
+              </div>
+              <figcaption><%= matches[i].name %> <%= matches[i].lastname %>, <%= matches[i].age %></figcaption>
+            </figure>
+            <div class="hearts">
+              <img class="dislike" src="./images/dislike.png" alt="">
+              <img class="like" src="./images/like.png" alt="">
+            </div>
+          </li>
+          <% } %>
+        </ul>
+        <nav class="slider-nav">
+          <div class="wrap">
+            <i class="material-icons arrows">arrow_back_ios</i>
+            <% for(let i=0;i < 6;i++) { 
+              if(false) { %> <!-- TODO: If list item is active, set other icon! -->
+              <i class="material-icons">panorama_fish_eye</i>
+              <% } else { %>
+                <i class="material-icons">panorama_fish_eye</i>
+              <% } %>
+            <% } %>
+            <i class="material-icons arrows">arrow_forward_ios</i>
+          </div>
+        </nav>
+      </section>
+      <section id="viewed-matches">
+        <div class="container">
+          <h2>Viewed matches</h2>
+          <ul>
+            <li>
+              <figure>
+                <img
+                  src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg"
+                  alt="Dating person">
+                <figcaption>Mark de Jong, 26</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg"
+                  alt="Dating person">
+                <figcaption>Mark de Jong, 26</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
     </article>
-  <% } %>
-  <img src="/images/logo.png" alt="">
+  </main>
+
+  <%- include('components/footer') %>
+
 </body>
+
 </html>

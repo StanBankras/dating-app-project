@@ -4,78 +4,19 @@ const path = require('path');
 const slug = require('slug');
 const bodyParser = require('body-parser');
 
-/* GET home page. */
+// Render homepage with matches
 router.get('/', function(req, res, next) {
-  let blogPosts = [
-    {
-        title: 'Perk is for real!',
-        body: '...',
-        author: 'Aaron Larner',
-        publishedAt: new Date('2016-03-19'),
-        createdAt: new Date('2016-03-19')
-    },
-    {
-        title: 'Development continues...',
-        body: '...',
-        author: 'Aaron Larner',
-        publishedAt: new Date('2016-03-18'),
-        createdAt: new Date('2016-03-18')
-    },
-    {
-        title: 'Welcome to Perk!',
-        body: '...',
-        author: 'Aaron Larner',
-        publishedAt: new Date('2016-03-17'),
-        createdAt: new Date('2016-03-17')
-    }
-];
-  res.render('index', { posts: blogPosts });
+  res.render('index', { matches: matches });
 });
 
-/* GET about page. */
-router.get('/about', (req, res, next) => {
-  res.render('about', { });
+// Render chats
+router.get('/chats', function(req, res, next) {
+  res.render('chats', { });
 });
 
-/* GET contact page. */
-router.get('/contact', (req, res, next) => {
-  res.render('contact', { });
-});
-
-/* GET chat page. */
-router.get('/chat', (req, res, next) => {
+// Render chat
+router.get('/chat', function(req, res, next) {
   res.render('chat', { });
-});
-
-/* GET add page. */
-router.get('/add', (req, res, next) => {
-  res.render('add', { });
-});
-
-let movies = [
-  {
-      title: 'Titanic',
-      description: 'This is the titanic',
-  },
-  {
-      title: 'Titanic2',
-      description: 'This is the titanic2',
-  }
-];
-
-/* GET movies page. */
-router.get('/movies', (req, res, next) => {
-  res.render('movies', { movies: movies }) 
-});
-
-router.post('/', (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
-  movies.push({
-    title: title,
-    description: description
-  });
-  res.redirect('movies');
 });
 
 // Dynamic route with params
@@ -83,8 +24,19 @@ router.get('/profile/:id', (req, res, next) => {
   res.send('You requested to see a profile with the id of ' + req.params.id);
 });
 
-router.get("/mp3", (req, res, next) => {
-  console.log(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
-  res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
- });
+let matches = [
+  {
+    name: 'Frank',
+    lastname: 'Visser',
+    age: 36,
+    picture: "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  },
+  {
+    name: 'Mark',
+    lastname: 'de Jong',
+    age: 30,
+    picture: "http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg"
+  }
+]
+
 module.exports = router;
