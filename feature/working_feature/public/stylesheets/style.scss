@@ -80,6 +80,9 @@ main {
       max-width: 700px;
       min-width: 300px;
       margin: 0 2rem;
+      &:first-child {
+        margin-left: 0;
+      }
       figure {
         padding: 1rem;
         .img-wrapper {

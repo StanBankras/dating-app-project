@@ -33,12 +33,8 @@
         <nav class="slider-nav">
           <div class="wrap">
             <i class="material-icons arrows" id="slide-back">arrow_back_ios</i>
-            <% for(let i=0;i < (matches.length < 6 ? matches.length : 6);i++) { 
-              if(false) { %> <!-- TODO: If list item is active, set other icon! -->
-              <i class="material-icons">panorama_fish_eye</i>
-              <% } else { %>
-                <i class="material-icons">panorama_fish_eye</i>
-              <% } %>
+            <% for(let i=0;i < matches.length;i++) {  %>
+            <i class="material-icons" data-slide="<%= i %>">panorama_fish_eye</i>
             <% } %>
             <i class="material-icons arrows" id="slide-forward">arrow_forward_ios</i>
           </div>
@@ -72,6 +68,9 @@
 
   <%- include('components/footer') %>
 
+  <script type='text/javascript'>
+    var matches =<%-JSON.stringify(matches)%>
+  </script>
   <script src="./javascripts/match-slider.js"></script>
 </body>
 

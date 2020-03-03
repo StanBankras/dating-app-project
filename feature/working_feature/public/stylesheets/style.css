@@ -94,6 +94,10 @@ main {
   margin: 0 2rem;
 }
 
+#matches ul li:first-child {
+  margin-left: 0;
+}
+
 #matches ul li figure {
   padding: 1rem;
 }
