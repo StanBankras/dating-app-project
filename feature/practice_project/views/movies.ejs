@@ -2,14 +2,14 @@
 
 <%- include('components/header', {}); %>
 
-<ul>
+<ul id="movies">
     <% for(let i = 0; i < movies.length; i++) { %>
     <li>
         <h2><%= movies[i].title %></h1>
         <p><%= movies[i].description %></p>
     </li>
-      <% } %>
+    <% } %>
 
 </ul>
-<a href="/add">Add new movie</a>
+<a class="add-btn" href="/add">Add new movie</a>
 <%- include('components/footer', {}); %>

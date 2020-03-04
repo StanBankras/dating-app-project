@@ -84,7 +84,6 @@ router.get('/profile/:id', (req, res, next) => {
 });
 
 router.get("/mp3", (req, res, next) => {
-  console.log(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
   res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
  });
 module.exports = router;

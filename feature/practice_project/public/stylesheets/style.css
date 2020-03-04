@@ -10,3 +10,21 @@ a {
 form label {
   display: block;
 }
+
+#movies {
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.add-btn:hover {
+  background-color: rgb(0, 85, 0);
+}
