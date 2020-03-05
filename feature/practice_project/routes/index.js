@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const slug = require('slug');
-const bodyParser = require('body-parser');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -76,6 +74,21 @@ router.post('/', (req, res) => {
     description: description
   });
   res.redirect('movies');
+});
+
+// Receives post requests from a form to edit movie title or movie description
+router.post('/edit', (req, res) => {
+  if (req.body.newTitle) {
+    const newTitle = req.body.newTitle;
+    const movieNr = req.body.movieNr;
+    movies[movieNr].title = newTitle;
+    res.redirect('movies');
+  } else if (req.body.newDescription) {
+    const newDescription = req.body.newDescription;
+    const movieNr = req.body.movieNr;
+    movies[movieNr].description = newDescription;
+    res.redirect('movies');
+  }
 });
 
 // Dynamic route with params

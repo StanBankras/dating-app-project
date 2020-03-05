@@ -4,7 +4,7 @@
 
 <ul id="movies">
     <% for(let i = 0; i < movies.length; i++) { %>
-    <li>
+    <li data-movie="<%= i %>">
         <h2><%= movies[i].title %></h1>
         <p><%= movies[i].description %></p>
     </li>
@@ -13,3 +13,5 @@
 </ul>
 <a class="add-btn" href="/add">Add new movie</a>
 <%- include('components/footer', {}); %>
+
+<script src="javascripts/editMovie.js"></script>
