@@ -1,8 +1,5 @@
-// UL containing all movies
-const moviesList = document.querySelector('#movies');
-
 // Listen to clicks on the UL, from there, check if a title or description was clicked.
-moviesList.addEventListener('click', (e) => {
+moviesUl.addEventListener('click', (e) => {
     if (e.target.tagName == 'LI') {
         let form = document.createElement('form');
         let cancelButton = document.createElement('a');
