@@ -91,12 +91,14 @@ router.post('/edit', (req, res) => {
   }
 });
 
-// Dynamic route with params
-router.get('/profile/:id', (req, res, next) => {
-  res.send('You requested to see a profile with the id of ' + req.params.id);
+router.post('/delete', (req, res) => {
+  const movieNr = req.body.movieNr;
+  movies.splice(movieNr, 1);
+  res.redirect('movies');
 });
 
 router.get("/mp3", (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
  });
+ 
 module.exports = router;

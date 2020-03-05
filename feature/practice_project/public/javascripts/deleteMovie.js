@@ -7,6 +7,10 @@ moviesList.addEventListener('click', (e) => {
         let form = document.createElement('form');
         let cancelButton = document.createElement('a');
         let deleteButton = document.createElement('button');
+        let inputHidden = document.createElement('input');
+        inputHidden.setAttribute('type', 'hidden');
+        inputHidden.setAttribute('value', e.target.dataset.movie);
+        inputHidden.setAttribute('name', 'movieNr');
         form.setAttribute('method', 'post');
         form.setAttribute('action', '/delete');
         cancelButton.textContent = 'Cancel';
@@ -15,10 +19,11 @@ moviesList.addEventListener('click', (e) => {
         deleteButton.setAttribute('type', 'submit');
         form.appendChild(deleteButton);
         form.appendChild(cancelButton);
+        form.appendChild(inputHidden);
         e.target.appendChild(form);
     }
 
-    if (e.target.tagName == 'A' && e.target.classList.contains('cancel')) {
+    if (e.target.classList.contains('cancel')) {
         const parentNode = e.target.parentNode.parentNode
         parentNode.removeChild(parentNode.lastChild);
     }
