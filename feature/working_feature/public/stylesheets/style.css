@@ -189,6 +189,7 @@ main {
 #viewed-matches {
   background-color: var(--secondary-color);
   padding: 3rem 0;
+  margin-bottom: 60px;
   color: white;
 }
 
@@ -251,6 +252,11 @@ main {
       -ms-flex-align: center;
           align-items: center;
   border: 2px solid var(--main-color);
+  border-bottom: 0px;
+}
+
+#chat-list .chat-item a .last-message {
+  font-size: 12px;
 }
 
 #chat-list .chat-item a img {
@@ -262,6 +268,10 @@ main {
 #chat-list .chat-item a i.material-icons {
   margin-left: auto;
   max-width: 24px;
+}
+
+#chat-list .chat-item:last-child a {
+  border-bottom: 2px solid var(--main-color);
 }
 
 /* 

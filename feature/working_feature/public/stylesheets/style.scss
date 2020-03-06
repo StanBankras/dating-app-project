@@ -150,6 +150,7 @@ main {
 #viewed-matches {
   background-color: var(--secondary-color);
   padding: 3rem 0;
+  margin-bottom: 60px;
   color: white;
   h2 {
     margin-bottom: 1rem;
@@ -195,7 +196,11 @@ main {
 		justify-content: flex-end;
 		padding: 0.5rem;
 		align-items: center;
-		border: 2px solid var(--main-color);
+    border: 2px solid var(--main-color);
+    border-bottom: 0px;
+    .last-message {
+      font-size: 12px;
+    }
 		img {
 			width: 50px;
 			border-radius: 50%;
@@ -205,7 +210,10 @@ main {
 			margin-left: auto;
 			max-width: 24px;
 		}
-	}
+  }
+  .chat-item:last-child a {
+    border-bottom: 2px solid var(--main-color);
+  }
 }
 
 /* 
