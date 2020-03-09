@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const mongo = require('mongodb');
 
 
 let movies = [
@@ -46,6 +47,7 @@ router.get('/movies', (req, res, next) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body);
   const title = req.body.title;
   const description = req.body.description;
   movies.push({

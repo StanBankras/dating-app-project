@@ -1,6 +1,7 @@
 // Grab elements from HTML
 const matchSlider = document.querySelector('#match-items');
 const matchSliderItems = document.querySelector('#match-items ul');
+const matchSliderItemsAll = document.querySelectorAll('#match-items ul li');
 const fwdButton = document.querySelector('#slide-forward');
 const backButton = document.querySelector('#slide-back');
 const slideIcons = document.querySelectorAll('.slider-nav .slide-icon');
@@ -21,6 +22,43 @@ matchSlider.style.overflow = 'hidden';
 // Set first icon to selected and add this match to the viewed-matches list
 document.querySelector('.slider-nav .material-icons[data-slide="0"]').innerHTML = filledDot;
 addViewedMatch(0);
+
+// Fill the icon of the active match (true for direction = forward move)
+function setSliderIcon(sliderStep) {
+  document.querySelector(`.slider-nav .material-icons[data-slide="${ sliderStep }"]`).innerHTML = filledDot;
+  return;
+}
+
+// Removes the icon that is provided
+function removeSliderIcon(sliderStep) {
+  document.querySelector(`.slider-nav .material-icons[data-slide="${ sliderStep }"]`).innerHTML = emptyDot;
+  return;
+}
+
+// Create a new list item that can be appended to viewed-matches (higher-order function: addViewedMatch())
+function createViewedMatch(match) {
+  let li = document.createElement('li');
+  // Set data attribute so it the list-item can be associated with the same slider item
+  li.setAttribute('data-match', match)
+  li.innerHTML = `
+  <figure>
+    <img
+      src="${ matches[match].picture }"
+      alt="Dating person"
+      >
+    <figcaption>Mark de Jong, 26</figcaption>
+  </figure>
+  `
+  return li;
+
+}
+
+// Adds a viewed match to the viewed-matches list
+function addViewedMatch(match) {
+  if(viewedMatches.includes(match)) return;
+  viewedMatches.push(match);
+  return viewedMatchesList.appendChild(createViewedMatch(match));
+}
 
 // Event listener for the forward button
 fwdButton.addEventListener('click', () => {
@@ -62,43 +100,6 @@ slideIcons.forEach((slide) => {
   });
 })
 
-// Fill the icon of the active match (true for direction = forward move)
-function setSliderIcon(sliderStep) {
-  document.querySelector(`.slider-nav .material-icons[data-slide="${ sliderStep }"]`).innerHTML = filledDot;
-  return;
-}
-
-// Removes the icon that is provided
-function removeSliderIcon(sliderStep) {
-  document.querySelector(`.slider-nav .material-icons[data-slide="${ sliderStep }"]`).innerHTML = emptyDot;
-  return;
-}
-
-// Create a new list item that can be appended to viewed-matches (higher-order function: addViewedMatch())
-function createViewedMatch(match) {
-  let li = document.createElement('li');
-  // Set data attribute so it the list-item can be associated with the same slider item
-  li.setAttribute('data-match', match)
-  li.innerHTML = `
-  <figure>
-    <img
-      src="${ matches[match].picture }"
-      alt="Dating person"
-      >
-    <figcaption>Mark de Jong, 26</figcaption>
-  </figure>
-  `
-  return li;
-
-}
-
-// Adds a viewed match to the viewed-matches list
-function addViewedMatch(match) {
-  if(viewedMatches.includes(match)) return;
-  viewedMatches.push(match);
-  return viewedMatchesList.appendChild(createViewedMatch(match));
-}
-
 // Add eventlistener to the list of viewed matches, to catch clicks and set move the slider accordingly
 viewedMatchesList.addEventListener('click', (e) => {
   if(e.target && e.target.nodeName == "LI") {
@@ -112,4 +113,18 @@ viewedMatchesList.addEventListener('click', (e) => {
     matchSliderItems.style.transform = `translateX(${ listOffset }px)`;
     setSliderIcon(matchNr);
   }
+});
+
+// Add eventlistener to each match list item, to catch likes & dislikes
+matchSliderItemsAll.forEach((match) => {
+  match.addEventListener('click', (e) => {
+    if (e.target.classList.contains('like')) {
+      let matchNr = e.target.parentNode.parentNode.dataset.match;
+      console.log('You liked the user ' + matches[matchNr].name);
+    }
+    if (e.target.classList.contains('dislike')) {
+      let matchNr = e.target.parentNode.parentNode.dataset.match;
+      console.log('You disliked the user ' + matches[matchNr].name);
+    }
+  });
 });

@@ -1,10 +1,10 @@
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const path = require('path');
 
 // Router in different file
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 
-var app = express();
+const app = express();
 
 
 // view engine setup
