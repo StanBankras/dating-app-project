@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 
+
 // Router in different file
 const indexRouter = require('./routes/index');
 

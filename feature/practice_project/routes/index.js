@@ -1,60 +1,75 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const mongo = require('mongodb');
 
+require('dotenv').config();
 
-let movies = [
-  {
-      title: 'Titanic',
-      description: 'This is the titanic',
-  },
-  {
-      title: 'Titanic2',
-      description: 'This is the titanic2',
+// Mongo setup code directly from MongoDB Atlas
+let db = null;
+let movies;
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST;
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  db = client.db(process.env.DB_NAME);
+  db.collection('movies').find().toArray(done)
+
+  function done(err, data) {
+    if (err) {
+      console.log(uri + ' error');
+      next(err)
+    } else {
+      movies = data;
+    }
   }
-];
+  client.close();
+});
+
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('movies', { movies: movies });
 });
 
 /* GET about page. */
 router.get('/about', (req, res, next) => {
-  res.render('about', { });
+  res.render('about', {});
 });
 
 /* GET contact page. */
 router.get('/contact', (req, res, next) => {
-  res.render('contact', { });
+  res.render('contact', {});
 });
 
 /* GET chat page. */
 router.get('/chat', (req, res, next) => {
-  res.render('chat', { });
+  res.render('chat', {});
 });
 
 /* GET add page. */
 router.get('/add', (req, res, next) => {
-  res.render('add', { });
+  res.render('add', {});
 });
 
 /* GET movies page. */
 router.get('/movies', (req, res, next) => {
-  res.render('movies', { movies: movies }) 
+  res.render('movies', { movies: movies })
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   console.log(req.body);
   const title = req.body.title;
   const description = req.body.description;
-  movies.push({
+  client.connect(err => {
+  
+  db.collection('movies').insertOne({
     title: title,
     description: description
+  }).catch(err => console.log(err));
+
+  client.close();
   });
-  res.redirect('/');
 });
 
 // Receives post requests from a form to edit movie title or movie description
@@ -80,6 +95,6 @@ router.post('/delete', (req, res) => {
 
 router.get("/mp3", (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
- });
- 
+});
+
 module.exports = router;
