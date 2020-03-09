@@ -22,24 +22,21 @@ client.connect(err => {
       movies = data;
     }
   }
-  client.close();
 });
-
-
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('movies', { movies: movies });
-});
+  db.collection('movies').find().toArray(done)
 
-/* GET about page. */
-router.get('/about', (req, res, next) => {
-  res.render('about', {});
-});
-
-/* GET contact page. */
-router.get('/contact', (req, res, next) => {
-  res.render('contact', {});
+  function done(err, data) {
+    if (err) {
+      console.log(uri + ' error');
+      next(err)
+    } else {
+      movies = data;
+      res.render('movies', { movies: movies });
+    }
+  }
 });
 
 /* GET chat page. */
@@ -52,24 +49,17 @@ router.get('/add', (req, res, next) => {
   res.render('add', {});
 });
 
-/* GET movies page. */
-router.get('/movies', (req, res, next) => {
-  res.render('movies', { movies: movies })
-});
-
-router.post('/', (req, res, next) => {
-  console.log(req.body);
+// Post route for adding a new movie to the MongoDB
+router.post('/', (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  client.connect(err => {
   
   db.collection('movies').insertOne({
     title: title,
     description: description
-  }).catch(err => console.log(err));
+  }).catch(err => { console.log(err) });
 
-  client.close();
-  });
+  res.redirect('/');
 });
 
 // Receives post requests from a form to edit movie title or movie description
