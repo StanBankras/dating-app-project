@@ -98,6 +98,7 @@ router.post('/edit', async (req, res) => {
   }
 });
 
+// Delete movie in the list
 router.post('/delete', async (req, res) => {
   const movieNr = slug(req.body.movieNr);
   // Delete movie by _id
@@ -109,6 +110,7 @@ router.post('/delete', async (req, res) => {
   res.redirect('/')
 });
 
+// Send other file instead of rendering EJS/html
 router.get("/mp3", (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'assets', 'music', 'birthday-horn.mp3'));
 });
