@@ -4,7 +4,7 @@
 
 <ul id="movies">
     <% for(let i = 0; i < movies.length; i++) { %>
-    <li data-movie="<%= i %>">
+    <li data-movie="<%= movies[i]._id %>">
         <h2><%= movies[i].title %></h1>
         <p><%= movies[i].description %></p>
     </li>
