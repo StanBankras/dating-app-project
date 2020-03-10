@@ -1,0 +1,30 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+form label {
+  display: block;
+}
+
+#movies {
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.add-btn:hover {
+  background-color: rgb(0, 85, 0);
+}
