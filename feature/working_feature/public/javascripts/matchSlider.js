@@ -46,7 +46,7 @@ function createViewedMatch(match) {
       src="${ matches[match].picture }"
       alt="Dating person"
       >
-    <figcaption>Mark de Jong, 26</figcaption>
+    <figcaption>${ matches[match].firstName } ${ matches[match].lastName }, ${ matches[match].age }</figcaption>
   </figure>
   `
   return li;

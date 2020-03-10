@@ -1,3 +1,4 @@
+// To be turned back into Javascript instead of jQuery.
 $(document).ready(function() {
     const socket = io.connect("http://localhost:3000");
 

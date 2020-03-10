@@ -12,6 +12,7 @@
         <h1>Your matches</h1>
         <div id="match-items">
           <ul>
+            <% if (matches != '') { %>
             <% for(let i=0;i < matches.length;i++) { %>
             <li data-match="<%= matches[i]._id %>">
               <figure>
@@ -27,6 +28,9 @@
                 <img class="like" src="./images/like.png" alt="">
               </div>
             </li>
+            <% } %>
+            <% } else { %>
+              
             <% } %>
           </ul>
         </div>
