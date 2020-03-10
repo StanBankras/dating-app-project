@@ -13,14 +13,14 @@
         <div id="match-items">
           <ul>
             <% for(let i=0;i < matches.length;i++) { %>
-            <li data-match="<%= i %>">
+            <li data-match="<%= matches[i]._id %>">
               <figure>
                 <div class="img-wrapper">
                   <img class="profile-picture"
                     src="<%= matches[i].picture %>"
                     alt="Dating person">
                 </div>
-                <figcaption><%= matches[i].name %> <%= matches[i].lastname %>, <%= matches[i].age %></figcaption>
+                <figcaption><%= matches[i].firstName %> <%= matches[i].lastName %>, <%= matches[i].age %></figcaption>
               </figure>
               <div class="hearts">
                 <img class="dislike" src="./images/dislike.png" alt="">
@@ -55,7 +55,9 @@
   <script type='text/javascript'>
     const matches =<%-JSON.stringify(matches)%>
   </script>
-  <script src="./javascripts/match-slider.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./javascripts/matchSlider.js"></script>
+  <script src="./javascripts/likingUsers.js"></script>
 </body>
 
 </html>

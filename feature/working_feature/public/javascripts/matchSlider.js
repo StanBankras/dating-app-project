@@ -114,17 +114,3 @@ viewedMatchesList.addEventListener('click', (e) => {
     setSliderIcon(matchNr);
   }
 });
-
-// Add eventlistener to each match list item, to catch likes & dislikes
-matchSliderItemsAll.forEach((match) => {
-  match.addEventListener('click', (e) => {
-    if (e.target.classList.contains('like')) {
-      let matchNr = e.target.parentNode.parentNode.dataset.match;
-      console.log('You liked the user ' + matches[matchNr].name);
-    }
-    if (e.target.classList.contains('dislike')) {
-      let matchNr = e.target.parentNode.parentNode.dataset.match;
-      console.log('You disliked the user ' + matches[matchNr].name);
-    }
-  });
-});

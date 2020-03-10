@@ -1,10 +1,10 @@
-var app = require('./app');
-var http = require('http');
+const app = require('./app');
+const http = require('http');
 
-var port = 3000;
+const port = 3000;
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 server.listen(port);
 server.on('listening', onListening);
@@ -16,8 +16,8 @@ server.on('listening', onListening);
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  let addr = server.address();
+  let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   console.log('Listening on port ' + port);
