@@ -8,7 +8,7 @@ This repository consists of a static site, which is hosted on https://stanbankra
 To run this project use git clone in your desired location and navigate to the feature:
 ```
 git clone git@github.com:StanBankras/dating-app-project.git
-cd feature/working_feature
+cd feature/
 ```
 
 Then install the node modules and run:
