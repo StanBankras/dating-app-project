@@ -22,8 +22,8 @@ router.get('/', async (req, res, next) => {
   await db.collection('users').find().toArray((err, data) => { 
     if (err) return console.error(err);
     matches = data; 
+    res.render('index', { matches: matches });
   });
-  res.render('index', { matches: matches });
 });
 
 router.post('/match', (req, res, next) => {
