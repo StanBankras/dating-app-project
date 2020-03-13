@@ -3,6 +3,7 @@ This repository consists of a static site, which is hosted on https://stanbankra
 
 ## Table of Contents
 * **Installation**
+* **Sources**
 
 ## Installation
 To run this project use git clone in your desired location and navigate to the feature:
@@ -16,3 +17,6 @@ Then install the node modules and run:
 npm install
 npm run dev
 ```
+
+## Sources
+* 
