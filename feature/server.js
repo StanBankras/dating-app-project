@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const http = require('http');
 
 const app = express();
@@ -14,6 +15,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(session({ 
+    resave: false,
+    saveUninitialized: true,
+    secure: true,
+    secret: process.env.SESSION_SECRET
+}));
 app.use('/', indexRouter); // Routing in separate file
 
 // 404 page route
