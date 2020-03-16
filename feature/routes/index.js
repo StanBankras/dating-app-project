@@ -2,7 +2,21 @@ const express = require('express');
 const router = express.Router();
 const mongo = require('mongodb');
 const slug = require('slug');
+const fs = require('file-system');
+const multer  = require('multer');
+const upload = multer({ dest: 'public/uploads/' });
 const ObjectID = mongo.ObjectID;
+
+// Edit slug so it doesn't replace spaces with '-';
+slug.defaults.mode ='pretty';
+slug.defaults.modes['pretty'] = {
+  replacement: ' ',
+  symbols: true,
+  remove: /[.]/g,
+  lower: false,
+  charmap: slug.charmap,
+  multicharmap: slug.multicharmap
+};
 
 // Load environment variables
 require('dotenv').config();

@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const slug = require('slug');
-const multer  = require('multer')
+const multer  = require('multer');
 const fs = require('file-system');
-const upload = multer({ dest: 'public/uploads/' })
+const upload = multer({ dest: 'public/uploads/' });
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 
+// Edit slug so it doesn't replace spaces with '-';
 slug.defaults.mode ='pretty';
 slug.defaults.modes['pretty'] = {
   replacement: ' ',
