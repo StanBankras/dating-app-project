@@ -26,7 +26,7 @@ client.connect(() => {
 });
 
 // Received help from Alex Bankras (Software engineer) to be able to export my database connection & server
-// The function(cb) asks the file requesting the database connection for a variable to store the connection in.
+// module.exports is placed here because the indexRouter also needs the callback function
 module.exports = {
     db: function(cb) {
         if(db) {
