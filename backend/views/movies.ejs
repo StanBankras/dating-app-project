@@ -3,10 +3,16 @@
 <%- include('components/header', {}); %>
 
 <ul id="movies">
+    <p class="description">
+        By clicking on the title, you can edit the title; same goes for the description. You can click on the dot of the list item to show a delete button.
+    </p>
     <% for(let i = 0; i < movies.length; i++) { %>
     <li data-movie="<%= movies[i]._id %>">
-        <h2><%= movies[i].title %></h1>
-        <p><%= movies[i].description %></p>
+        <h2 class="editable"><%= movies[i].title %></h1>
+        <p class="editable"><%= movies[i].description %></p>
+        <% if(movies[i].cover) { %>
+        <img src="<%= 'uploads/' + movies[i].cover %>" alt="">
+        <% } %>
     </li>
     <% } %>
 </ul>

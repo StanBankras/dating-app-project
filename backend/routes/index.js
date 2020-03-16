@@ -1,18 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const mongo = require('mongodb');
 const slug = require('slug');
+const multer  = require('multer')
+const fs = require('file-system');
+const upload = multer({ dest: 'public/uploads/' })
+const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
+
+slug.defaults.mode ='pretty';
+slug.defaults.modes['pretty'] = {
+  replacement: ' ',
+  symbols: true,
+  remove: /[.]/g,
+  lower: false,
+  charmap: slug.charmap,
+  multicharmap: slug.multicharmap
+};
 
 // Load environment variables
 require('dotenv').config();
 
 // Mongo setup code, most directly from MongoDB Atlas documentation
 let db = null;
+let movies = null;
 const MongoClient = mongo.MongoClient;
 const uri = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST;
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   db = client.db(process.env.DB_NAME);
   db.collection('movies').find().toArray(done)
@@ -29,7 +43,6 @@ client.connect(err => {
 
 // Load the newest version of movies and then render the home page
 router.get('/', async (req, res, next) => {
-  let movies;
   try {
     movies = await db.collection('movies').find().toArray();
   } catch(err) {
@@ -49,13 +62,15 @@ router.get('/add', (req, res, next) => {
 });
 
 // Post route for adding a new movie to the MongoDB
-router.post('/', async (req, res) => {
+router.post('/', upload.single('cover'), async (req, res) => {
   const title = slug(req.body.title);
   const description = slug(req.body.description);
+  const cover = req.file ? slug(req.file.filename) : '';
   try {
     await db.collection('movies').insertOne({
       title: title,
-      description: description
+      description: description,
+      cover: cover
     })
   } catch(err) {
     console.error(error);
@@ -100,9 +115,27 @@ router.post('/edit', async (req, res) => {
 
 // Delete movie in the list
 router.post('/delete', async (req, res) => {
+
+  // Use the movieNr (move id) to find the right entry in the MongoDB
   const movieNr = slug(req.body.movieNr);
-  // Delete movie by _id
+
   try {
+    const deletingMovie = await db.collection('movies').findOne({ _id: ObjectID(movieNr) });
+    // Remove the cover from the uploads folder (as this isnt done by removing the item in the database!)
+    // Information on how to delete a file with file-system found here: https://stackoverflow.com/a/36614925
+    if (deletingMovie.cover) {
+      const coverPath = 'public/uploads/' + deletingMovie.cover;
+      fs.stat(coverPath, (err, stats) => {     
+        if (err) {
+          return console.error(err);
+        }
+        fs.unlink(coverPath, (err) => {
+          if(err) return console.log(err);
+          console.log('file deleted successfully');
+        });  
+     });
+    }
+    // Delete movie by _id
     await db.collection('movies').deleteOne({ _id: ObjectID(movieNr) })
   } catch(err) {
     console.error(err);

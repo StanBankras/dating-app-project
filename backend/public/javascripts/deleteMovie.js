@@ -1,6 +1,7 @@
 // Listen to clicks on the UL, from there, check if a title or description was clicked.
 moviesUl.addEventListener('click', (e) => {
     if (e.target.tagName == 'LI') {
+        if(e.target.lastChild.nodeName == 'FORM') return;
         let form = document.createElement('form');
         let cancelButton = document.createElement('a');
         let deleteButton = document.createElement('button');

@@ -3,11 +3,17 @@ const moviesUl = document.querySelector('#movies');
 
 // Listen to clicks on the UL, from there, check if a title or description was clicked.
 moviesUl.addEventListener('click', (e) => {
-    if (e.target.tagName == 'H2') {
-        if (e.target.childNodes.length > 1) return;
+    if (e.target.tagName == 'H2' && e.target.classList.contains('editable')) {
+        if (e.target.childNodes.length > 1) {
+            e.target.removeChild(e.target.lastElementChild);
+            return;
+        }
         createForm(e, 'title');
-    } else if (e.target.tagName == 'P') {
-        if (e.target.childNodes.length > 1) return;
+    } else if (e.target.tagName == 'P' && e.target.classList.contains('editable')) {
+        if (e.target.childNodes.length > 1) {
+            e.target.removeChild(e.target.lastElementChild);
+            return;
+        }
         createForm(e, 'description');
     }
 });
