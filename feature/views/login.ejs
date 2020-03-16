@@ -8,8 +8,9 @@
   <form action="/login-as" method="post">
     <label for="user">Login as</label>
     <select name="user" id="user">
-      <option value="5e6f3f5d02bf8547f8dee3ca">Yari Molenaar</option>
-      <option value="5e6f45a702bf8547f8dee3d1">Julia Vormer</option>
+      <% for (let i=0; i < users.length;i++) { %>
+      <option value="<%= users[i]._id %>"><%= users[i].firstName + ' ' + users[i].lastName %></option>
+      <% } %>
     </select>
     <button type="submit">Login</button>
   </form>

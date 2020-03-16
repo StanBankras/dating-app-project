@@ -76,8 +76,22 @@ router.post('/dislike', (req, res, next) => {
 });
 
 // Render chats
-router.get('/chats', (req, res, next) => {
-  res.render('chats', { });
+router.get('/chats', async (req, res, next) => {
+  try {
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
+    const chatList = [];
+    user.chats.forEach((chat, err) => {
+      if(err) {
+        console.error(err);
+      }
+      chatList.push(db.collection('chats').findOne({ _id: chat }));
+    });
+    data = await Promise.all(chatList)
+    res.render('chats', { chats: data });
+
+  } catch(err) {
+    console.error(err);
+  }
 });
 
 // Render chat
@@ -85,8 +99,13 @@ router.get('/chat', (req, res, next) => {
   res.render('chat', { });
 });
 
-router.get('/login', (req, res, next) => {
-  res.render('login', { });
+router.get('/login', async (req, res, next) => {
+  try {
+    let users = await db.collection('users').find().toArray();
+    res.render('login', { users });
+  } catch(err) {
+    console.error(err);
+  }
 });
 
 router.post('/login-as', (req, res, next) => {
@@ -103,6 +122,19 @@ async function checkMatch(userId, likedUserId) {
   try {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) });
     if (likedUser.likedPersons.includes(userId)) {
+      const chats = await db.collection('chats').find().count();
+      console.log(chats);
+      await db.collection('chats').insertOne({
+        _id: chats, users: [userId, likedUserId], messages: []
+      });
+      await db.collection('users').updateOne(
+        { _id: ObjectID(userId) },
+        { $push: { "chats": chats } }
+      )
+      await db.collection('users').updateOne(
+        { _id: ObjectID(likedUserId) },
+        { $push: { "chats": chats } }
+      )
       console.log('It is a match!');
     }
   } catch(err) {
