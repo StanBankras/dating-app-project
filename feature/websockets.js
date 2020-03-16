@@ -1,4 +1,4 @@
-const server = require('./server.js');
+const server = require('./server.js').server;
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {

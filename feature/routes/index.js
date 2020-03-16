@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const slug = require('slug');
-const fs = require('file-system');
-const multer  = require('multer');
-const upload = multer({ dest: 'public/uploads/' });
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
+// Use database connection from server.js
+const dbCallback = require('../server.js').db;
+let db;
+dbCallback(database => {
+  db = database
+});
 
 // Edit slug so it doesn't replace spaces with '-';
 slug.defaults.mode ='pretty';
@@ -18,23 +21,11 @@ slug.defaults.modes['pretty'] = {
   multicharmap: slug.multicharmap
 };
 
-// Load environment variables
-require('dotenv').config();
-
-// Mongo setup code, obtained from the Full Driver Sample provided by MongoDB
-let db = null;
-const MongoClient = mongo.MongoClient;
-const uri = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(() => {
-  db = client.db(process.env.DB_NAME);
-});
-
 // Render homepage with matches of the logged in user
 router.get('/', async (req, res, next) => {  
   try {
-    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
-    const userObjects = user.matches.map(item => { return new ObjectID(item) });
+    const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.user) });
+    const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
     const matchList = await db.collection('users').find({
       '_id': {
         '$in': userObjects
@@ -70,6 +61,7 @@ router.post('/like', async (req, res, next) => {
   }
 });
 
+// To do
 router.post('/dislike', (req, res, next) => {
   console.log(req.body.id, 'disliked!');
   res.sendStatus(200);
@@ -94,49 +86,67 @@ router.get('/chats', async (req, res, next) => {
   }
 });
 
-// Render chat
-router.get('/chat', (req, res, next) => {
-  res.render('chat', { });
-});
-
-router.get('/login', async (req, res, next) => {
+// Render individual chat based on the chat id
+router.get('/chat/:id', async (req, res, next) => {
   try {
-    let users = await db.collection('users').find().toArray();
-    res.render('login', { users });
+    const id = parseInt(req.params.id);
+    const chat = await db.collection('chats').findOne({ _id: id });
+    res.render('chat', { users: chat.users, messages: chat.messages });
   } catch(err) {
     console.error(err);
   }
 });
 
+// Load users that are able to login
+router.get('/login', async (req, res, next) => {
+  try {
+    const users = await db.collection('users').find().toArray();
+    res.render('login', { users: users });
+  } catch(err) {
+    console.error(err);
+  }
+});
+
+// Post route for login
 router.post('/login-as', (req, res, next) => {
   req.session.user = req.body.user;
   res.redirect('/');
 });
 
+// Post route for logging out
 router.post('/logout', (req, res, next) => {
-  req.session.user = '';
+  req.session.destroy();
   res.redirect('/login');
 });
 
+// Function checks if both users liked each other
 async function checkMatch(userId, likedUserId) {
   try {
-    const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) });
+    const likedUser = db.collection('users').findOne({ _id: ObjectID(likedUserId) })
     if (likedUser.likedPersons.includes(userId)) {
-      const chats = await db.collection('chats').find().count();
-      console.log(chats);
-      await db.collection('chats').insertOne({
-        _id: chats, users: [userId, likedUserId], messages: []
-      });
-      await db.collection('users').updateOne(
-        { _id: ObjectID(userId) },
-        { $push: { "chats": chats } }
-      )
-      await db.collection('users').updateOne(
-        { _id: ObjectID(likedUserId) },
-        { $push: { "chats": chats } }
-      )
+      createChat(userId, likedUserId);
       console.log('It is a match!');
     }
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+// Creates a new chat in the database and links it to two users
+async function createChat(id, otherId) {
+  try {
+    const chats = await db.collection('chats').find().count();
+    await db.collection('chats').insertOne({
+      _id: chats, users: [id, otherId], messages: []
+    });
+    await db.collection('users').updateOne(
+      { _id: ObjectID(id) },
+      { $push: { "chats": chats } }
+    )
+    await db.collection('users').updateOne(
+      { _id: ObjectID(otherId) },
+      { $push: { "chats": chats } }
+    )
   } catch(err) {
     console.error(err);
   }

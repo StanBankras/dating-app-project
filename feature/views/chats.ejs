@@ -12,7 +12,7 @@
         <ul id="chat-list">
           <% for (let i=0;i < chats.length;i++) { %>
           <li class="chat-item">
-            <a href="/chat">
+            <a href="/chat/<%= chats[i]._id %>">
               <img
                 src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg"
                 alt="Rick Buijs">
