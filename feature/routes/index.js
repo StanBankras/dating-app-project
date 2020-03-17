@@ -22,7 +22,7 @@ slug.defaults.modes['pretty'] = {
 };
 
 // Render homepage with matches of the logged in user
-router.get('/', async (req, res, next) => {  
+router.get('/', isAuthenticated, async (req, res, next) => {  
   try {
     const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.user) });
     const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
@@ -43,13 +43,13 @@ router.post('/like', async (req, res, next) => {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
 
     // Check if the person is already liked, this means remove the like.
-    if (user.likedPersons.includes(req.body.id)) {
+    if (user.likedPersons.includes(slug(req.body.id))) {
       try {
         const chats = await db.collection('chats').find().toArray();
         const openChats = chats.filter(chat => {
-          return chat.users.includes(user._id.toString()) && chat.users.includes(req.body.id.toString());
+          return chat.users.includes(user._id.toString()) && chat.users.includes(slug(req.body.id).toString());
         });
-        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedPersons': req.body.id } });
+        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedPersons': slug(req.body.id) } });
         if (openChats.length > 0) {
           openChats.forEach(chat => removeChat(chat));
         }
@@ -65,7 +65,7 @@ router.post('/like', async (req, res, next) => {
       // Add the liked user to the likedPersons array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.user) },
-        { $push: { "likedPersons": req.body.id } }
+        { $push: { "likedPersons": slug(req.body.id) } }
       )
       console.log('Liked');
       res.sendStatus(200);
@@ -76,7 +76,7 @@ router.post('/like', async (req, res, next) => {
 });
 
 // Render chats
-router.get('/chats', async (req, res, next) => {
+router.get('/chats', isAuthenticated, async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
     const chatList = [];
@@ -106,7 +106,7 @@ router.get('/chats', async (req, res, next) => {
 });
 
 // Render individual chat based on the chat id
-router.get('/chat/:id', async (req, res, next) => {
+router.get('/chat/:id', isAuthenticated, async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
     const id = parseInt(req.params.id);
@@ -129,7 +129,7 @@ router.get('/login', async (req, res, next) => {
 
 // Post route for login
 router.post('/login-as', (req, res, next) => {
-  req.session.user = req.body.user;
+  req.session.user = slug(req.body.user);
   res.redirect('/');
 });
 
@@ -138,6 +138,12 @@ router.post('/logout', (req, res, next) => {
   req.session.destroy();
   res.redirect('/login');
 });
+
+// Check if a user is logged in
+function isAuthenticated(req, res, next) {
+  if (req.session.user != undefined) return next();
+  res.redirect('/login');
+}
 
 // Function checks if both users liked each other
 async function checkMatch(userId, likedUserId) {
