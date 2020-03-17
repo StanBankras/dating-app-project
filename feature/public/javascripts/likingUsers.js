@@ -6,8 +6,12 @@ likeHearts.forEach((heart) => {
         return axios.post('/like', {
             id: id
         })
-        .then(() => {
-            e.target.classList.add('active');
+        .then((res) => {
+            if (res.request.status == 201) {
+                e.target.classList.remove('active');
+            } else {
+                e.target.classList.add('active');
+            }
         })
     });
 });

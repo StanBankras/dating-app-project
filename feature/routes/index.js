@@ -42,9 +42,23 @@ router.post('/like', async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
 
-    // Check if the person is already liked
+    // Check if the person is already liked, this means remove the like.
     if (user.likedPersons.includes(req.body.id)) {
-      console.log('Person already liked.');        
+      try {
+        const chats = await db.collection('chats').find().toArray();
+        const openChats = chats.filter(chat => {
+          return chat.users.includes(user._id.toString()) && chat.users.includes(req.body.id.toString());
+        });
+        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedPersons': req.body.id } });
+        if (openChats.length > 0) {
+          openChats.forEach(chat => removeChat(chat));
+        }
+
+        res.sendStatus(201);
+        console.log('Disliked.');   
+      } catch(err) {
+        console.error(err);
+      }
     } else {
       // See if the other user already liked this user too
       checkMatch(req.session.user, req.body.id);
@@ -53,7 +67,7 @@ router.post('/like', async (req, res, next) => {
         { _id: ObjectID(req.session.user) },
         { $push: { "likedPersons": req.body.id } }
       )
-      console.log('Updated');
+      console.log('Liked');
       res.sendStatus(200);
     }
   } catch(err) {
@@ -74,11 +88,15 @@ router.get('/chats', async (req, res, next) => {
     });
     data = await Promise.all(chatList);
     const userList = [];
-    data.forEach(chat => {
-      chat.users.forEach(user => {
-        userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
-      });
-    })
+    if (data.length > 0) {
+      data.forEach(chat => {
+        chat.users.forEach(user => {
+          userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
+        });
+      })
+    } else {
+      data = [];
+    }
     users = await Promise.all(userList);
     res.render('chats', { chats: data, users, user });
 
@@ -149,6 +167,20 @@ async function createChat(id, otherId) {
       { _id: ObjectID(otherId) },
       { $push: { "chats": chats } }
     )
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function removeChat(chat) {
+  try {
+    const users = chat.users;
+    // Delete the chat
+    await db.collection('chats').deleteOne({ _id: chat._id });
+    // Delete chat for the users
+    users.forEach(async (user) => {
+      await db.collection('users').updateOne({ _id: ObjectID(user) }, { $pull: { 'chats': chat._id } });
+    })
   } catch(err) {
     console.error(err);
   }
