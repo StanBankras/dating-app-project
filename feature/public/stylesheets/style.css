@@ -140,6 +140,15 @@ main {
 
 #matches ul .hearts .like {
   margin-left: auto;
+  -webkit-filter: brightness(100);
+          filter: brightness(100);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+#matches ul .hearts .like.active, #matches ul .hearts .like:hover {
+  -webkit-filter: none;
+          filter: none;
 }
 
 #matches ul .hearts img {

@@ -31,7 +31,7 @@ router.get('/', async (req, res, next) => {
         '$in': userObjects
       }
     }).toArray();
-    res.render('index', { matches: matchList });
+    res.render('index', { matches: matchList, user });
   } catch(err) {
     console.error(err);
   }
@@ -61,12 +61,6 @@ router.post('/like', async (req, res, next) => {
   }
 });
 
-// To do
-router.post('/dislike', (req, res, next) => {
-  console.log(req.body.id, 'disliked!');
-  res.sendStatus(200);
-});
-
 // Render chats
 router.get('/chats', async (req, res, next) => {
   try {
@@ -78,8 +72,15 @@ router.get('/chats', async (req, res, next) => {
       }
       chatList.push(db.collection('chats').findOne({ _id: chat }));
     });
-    data = await Promise.all(chatList)
-    res.render('chats', { chats: data });
+    data = await Promise.all(chatList);
+    const userList = [];
+    data.forEach(chat => {
+      chat.users.forEach(user => {
+        userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
+      });
+    })
+    users = await Promise.all(userList);
+    res.render('chats', { chats: data, users, currentUser: req.session.user });
 
   } catch(err) {
     console.error(err);
@@ -122,7 +123,7 @@ router.post('/logout', (req, res, next) => {
 // Function checks if both users liked each other
 async function checkMatch(userId, likedUserId) {
   try {
-    const likedUser = db.collection('users').findOne({ _id: ObjectID(likedUserId) })
+    const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
     if (likedUser.likedPersons.includes(userId)) {
       createChat(userId, likedUserId);
       console.log('It is a match!');

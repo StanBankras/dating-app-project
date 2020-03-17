@@ -2,6 +2,14 @@
 
 <%- include('defaults/head') %>
 
+<%
+  function included(id) {
+    if (user.likedPersons.indexOf(id) != -1) {
+      console.log(matches[1]._id);
+    }
+  }
+%>
+
 <body>
 
   <%- include('components/header') %>
@@ -24,8 +32,7 @@
                 <figcaption><%= matches[i].firstName %> <%= matches[i].lastName %>, <%= matches[i].age %></figcaption>
               </figure>
               <div class="hearts">
-                <img class="dislike" src="./images/dislike.png" alt="">
-                <img class="like" src="./images/like.png" alt="">
+                <img class="like <% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>active<% } %>" src="./images/like.png" alt="">                
               </div>
             </li>
             <% } %>
@@ -57,7 +64,11 @@
   <%- include('components/footer') %>
 
   <script type='text/javascript'>
-    const matches =<%-JSON.stringify(matches)%>
+    const user =<%-JSON.stringify(user)%>;
+    const matches =<%-JSON.stringify(matches)%>;
+    if (user.likedPersons.indexOf(matches[1]._id) != -1) {
+      console.log(matches[1]._id);
+    }
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./javascripts/matchSlider.js"></script>

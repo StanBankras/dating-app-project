@@ -9,7 +9,12 @@
   <main>
     <article>
       <section class="fluid container">
+        <%= users[1].firstName %>
+        <%= currentUser %>
         <ul id="chat-list">
+          <% if (chats.length < 1) { %>
+            <p>You have no chats yet.</p>
+          <% }%>
           <% for (let i=0;i < chats.length;i++) { %>
           <li class="chat-item">
             <a href="/chat/<%= chats[i]._id %>">
@@ -18,7 +23,7 @@
                 alt="Rick Buijs">
               <div>
                 <p>Chat: <%= chats[i]._id %></p>
-                <p class="last-message">Stuur een berichtje naar Rick!</p>
+                <p class="last-message">Stuur een berichtje naar <%= chats[i].users[1] %>!</p>
               </div>
               <i class="material-icons arrows">arrow_forward_ios</i>
             </a>
