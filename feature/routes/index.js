@@ -80,7 +80,7 @@ router.get('/chats', async (req, res, next) => {
       });
     })
     users = await Promise.all(userList);
-    res.render('chats', { chats: data, users, currentUser: req.session.user });
+    res.render('chats', { chats: data, users, user });
 
   } catch(err) {
     console.error(err);
@@ -90,9 +90,10 @@ router.get('/chats', async (req, res, next) => {
 // Render individual chat based on the chat id
 router.get('/chat/:id', async (req, res, next) => {
   try {
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
     const id = parseInt(req.params.id);
     const chat = await db.collection('chats').findOne({ _id: id });
-    res.render('chat', { users: chat.users, messages: chat.messages });
+    res.render('chat', { users: chat.users, messages: chat.messages, user });
   } catch(err) {
     console.error(err);
   }

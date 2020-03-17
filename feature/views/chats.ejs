@@ -9,21 +9,22 @@
   <main>
     <article>
       <section class="fluid container">
-        <%= users[1].firstName %>
-        <%= currentUser %>
         <ul id="chat-list">
           <% if (chats.length < 1) { %>
             <p>You have no chats yet.</p>
           <% }%>
-          <% for (let i=0;i < chats.length;i++) { %>
+          <% for (let i=0;i < chats.length;i++) { 
+            // Defining the user the currentUser is chatting with
+            const otherUser = user._id == chats[i].users[0] ? users[1] : users[0]; 
+          %>
           <li class="chat-item">
             <a href="/chat/<%= chats[i]._id %>">
               <img
-                src="http://www.kevmill.com/wp-content/uploads/2019/09/cropped-Kevin-profile-pic-2019-square-small.jpg"
-                alt="Rick Buijs">
+                src="<%= otherUser.picture %>"
+                alt="<%= otherUser.firstName %> <%= otherUser.lastName %>">
               <div>
-                <p>Chat: <%= chats[i]._id %></p>
-                <p class="last-message">Stuur een berichtje naar <%= chats[i].users[1] %>!</p>
+                <p>Chat with <%= otherUser.firstName %>, <%= otherUser.age %></p>
+                <p class="last-message">Send a message to <%= otherUser.firstName %>!</p>
               </div>
               <i class="material-icons arrows">arrow_forward_ios</i>
             </a>
