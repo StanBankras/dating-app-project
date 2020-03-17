@@ -172,6 +172,7 @@ async function createChat(id, otherId) {
   }
 }
 
+// Removes a chat from the chats collection and from the array of chats for the users that are in the chat
 async function removeChat(chat) {
   try {
     const users = chat.users;
