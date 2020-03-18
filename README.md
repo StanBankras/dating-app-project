@@ -16,6 +16,3 @@ Then install the node modules and run:
 npm install
 npm run dev
 ```
-
-## Sources
-* 
