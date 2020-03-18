@@ -1,5 +1,6 @@
 # Project Tech: Dating app feature
-Description of app will be here soon.
+This part of the dating app is for liking users that you match with. Once you like a user, and they like you too, a new chat is opened in the chat list. The chat functionality itself is not ready yet.
+For the sake of testing the feature, a simple login screen is present to log in as any user you want to.
 
 ## Table of Contents
 * **Installation**
