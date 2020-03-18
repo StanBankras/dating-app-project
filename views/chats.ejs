@@ -15,7 +15,7 @@
           <% }%>
           <% for (let i=0;i < chats.length;i++) { 
             // Defining the user the currentUser is chatting with
-            const otherUser = user._id == chats[i].users[0] ? chats[i].users[1] : chats[i].users[0]; 
+            const otherUser = user.firstName === chats[i].users[0].firstName ? chats[i].users[1] : chats[i].users[0]; 
           %>
           <li class="chat-item">
             <a href="/chat/<%= chats[i]._id %>">

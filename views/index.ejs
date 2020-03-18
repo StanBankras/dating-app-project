@@ -58,9 +58,6 @@
   <script type='text/javascript'>
     const user =<%-JSON.stringify(user)%>;
     const matches =<%-JSON.stringify(matches)%>;
-    if (user.likedPersons.indexOf(matches[1]._id) != -1) {
-      console.log(matches[1]._id);
-    }
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./javascripts/matchSlider.js"></script>

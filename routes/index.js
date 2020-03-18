@@ -162,17 +162,18 @@ async function checkMatch(userId, likedUserId) {
 // Creates a new chat in the database and links it to two users
 async function createChat(id, otherId) {
   try {
-    const chats = await db.collection('chats').find().count();
+    const lastChat = await db.collection('chats').findOne({}, { sort: { _id: -1 }, limit: 1 });
+    const chatId = lastChat === null ? 0 : lastChat._id+1;
     await db.collection('chats').insertOne({
-      _id: chats, users: [id, otherId], messages: []
+      _id: chatId, users: [id, otherId], messages: []
     });
     await db.collection('users').updateOne(
       { _id: ObjectID(id) },
-      { $push: { "chats": chats } }
+      { $push: { "chats": chatId } }
     )
     await db.collection('users').updateOne(
       { _id: ObjectID(otherId) },
-      { $push: { "chats": chats } }
+      { $push: { "chats": chatId } }
     )
   } catch(err) {
     console.error(err);
