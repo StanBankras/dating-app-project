@@ -55,7 +55,7 @@ router.post('/like', async (req, res, next) => {
         }
 
         res.sendStatus(201);
-        console.log('Disliked.');   
+        console.log('Disliked.');
       } catch(err) {
         console.error(err);
       }
@@ -86,19 +86,19 @@ router.get('/chats', isAuthenticated, async (req, res, next) => {
       }
       chatList.push(db.collection('chats').findOne({ _id: chat }));
     });
-    data = await Promise.all(chatList);
-    const userList = [];
-    if (data.length > 0) {
-      data.forEach(chat => {
-        chat.users.forEach(user => {
+    allChats = await Promise.all(chatList);
+    if (allChats.length > 0) {
+      for (let i =0; i < allChats.length;i++) {
+        const userList = [];
+        allChats[i].users.forEach(user => {
           userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
         });
-      })
+        allChats[i].users = await Promise.all(userList);
+      }
     } else {
-      data = [];
+      allChats = [];
     }
-    users = await Promise.all(userList);
-    res.render('chats', { chats: data, users, user });
+    res.render('chats', { chats: allChats, user });
 
   } catch(err) {
     console.error(err);
@@ -129,6 +129,7 @@ router.get('/login', async (req, res, next) => {
 
 // Post route for login
 router.post('/login-as', (req, res, next) => {
+  // Setting the session user to the selected user on login
   req.session.user = slug(req.body.user);
   res.redirect('/');
 });
