@@ -38,6 +38,7 @@ module.exports = {
     server // Exporting for use in websockets.js
 }
 
+// Import routes from external file
 const indexRouter = require('./routes/index');
 require('./websockets.js');
 
@@ -47,6 +48,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// Source: https://www.npmjs.com/package/express-session
 app.use(session({ 
     resave: false,
     saveUninitialized: true,

@@ -10,7 +10,7 @@ dbCallback(database => {
   db = database
 });
 
-// Edit slug so it doesn't replace spaces with '-';
+// Edit slug so it doesn't replace spaces with '-' -- https://www.npmjs.com/package/slugify
 slug.defaults.mode ='pretty';
 slug.defaults.modes['pretty'] = {
   replacement: ' ',
@@ -140,7 +140,7 @@ router.post('/logout', (req, res, next) => {
   res.redirect('/login');
 });
 
-// Check if a user is logged in
+// Check if a user is logged in -- source: https://scotch.io/tutorials/route-middleware-to-check-if-a-user-is-authenticated-in-node-js
 function isAuthenticated(req, res, next) {
   if (req.session.user != undefined) return next();
   res.redirect('/login');
