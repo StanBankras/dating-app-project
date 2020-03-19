@@ -39,7 +39,17 @@ __Note that the chats collection at start should be empty, as the server creates
 
 
 ## Sources used
-* MongoDB documentation: https://docs.mongodb.com/
-* MDN documentation: https://developer.mozilla.org/en-US/
-* Stackoverflow for small bugs: https://stackoverflow.com/
-* Expressjs site to install Express and learn basics: https://expressjs.com/en/starter/installing.html
+* 7 Principles Of Clean And Optimized CSS. (2008, August 19). Retrieved from https://www.smashingmagazine.com/2008/08/7-principles-of-clean-and-optimized-css-code/
+* Code Grammar. (2018, November 4). JavaScript Tutorial Part 1 - Lexical Environment. Retrieved March 19, 2020, from https://www.youtube.com/watch?v=_p1dwxpxGIw&feature=emb_title
+* Cosset, D. (2019, February 16). Higher-order functions in Javascript. Retrieved March 19, 2020, from https://dev.to/damcosset/higher-order-functions-in-javascript-4j8b
+* Closures. (2020, March 6). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+* ExpressJS Installation. (n.d.). Retrieved March 19, 2020, from https://expressjs.com/en/starter/installing.html
+* f. (2018, November 7). What is Progressive Enhancement, and why it matters. Retrieved March 19, 2020, from https://www.freecodecamp.org/news/what-is-progressive-enhancement-and-why-it-matters-e80c7aaf834a/
+* Hoisting. (2020, March 9). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
+* Immukul. (2019, March 20). Prototype in JavaScript. Retrieved March 19, 2020, from https://www.geeksforgeeks.org/prototype-in-javascript/
+* JavaScript Guide. (2019, August 21). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+* Handlebars.js vs EJS detailed comparison. (n.d.). Retrieved March 19, 2020, from https://www.slant.co/versus/181/184/~handlebars-js_vs_ejs
+* Marquez, S. (2018, March 15). 8 Best Practices to Write Clean HTML Code. Retrieved March 19, 2020, from https://medium.com/@sergimarquez/8-best-practices-to-write-clean-html-code-1cd407e2a7ec
+* MDN Web Docs. (n.d.). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/
+* MongoDB Documentation. (n.d.). Retrieved March 19, 2020, from https://docs.mongodb.com/
+
