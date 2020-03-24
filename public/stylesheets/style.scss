@@ -118,6 +118,9 @@ main {
         button {
           background-color: transparent !important;
           border: none;
+          .liked-text {
+            display: none;
+          }
         }
       }
       .like {

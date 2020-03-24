@@ -149,6 +149,10 @@ main {
   border: none;
 }
 
+#matches ul .hearts form button .liked-text {
+  display: none;
+}
+
 #matches ul .hearts .like {
   z-index: 10;
   position: relative;

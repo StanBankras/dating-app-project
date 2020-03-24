@@ -30,6 +30,7 @@
                   <input type="hidden" name="id" value="<%= matches[i]._id %>">
                   <button type="submit">
                     <img class="like <% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>active<% } %>" src="./images/like.png" alt="">
+                    <span class="liked-text"><% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>Liked<% } else { %>Not liked<% } %></span>
                   </button>
                 </form>          
               </div>
