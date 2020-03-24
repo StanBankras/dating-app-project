@@ -53,9 +53,10 @@ router.post('/like', async (req, res, next) => {
         if (openChats.length > 0) {
           openChats.forEach(chat => removeChat(chat));
         }
-
-        res.sendStatus(201);
-        console.log('Disliked.');
+        if (!req.body.js) {
+          return res.redirect('/');
+        }
+        return res.sendStatus(201);
       } catch(err) {
         console.error(err);
       }
@@ -68,7 +69,10 @@ router.post('/like', async (req, res, next) => {
         { $push: { "likedPersons": slug(req.body.id) } }
       )
       console.log('Liked');
-      res.sendStatus(200);
+      if (!req.body.js) {
+        return res.redirect('/');
+      }
+      return res.sendStatus(200);
     }
   } catch(err) {
     console.error(err);

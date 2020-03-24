@@ -67,6 +67,7 @@ main {
 #matches {
   padding: 1rem 0;
   #match-items {
+    overflow-x: auto;
   }
   ul {
     display: flex;
@@ -111,18 +112,25 @@ main {
       width: 100%;
       padding: 0.5rem 1rem;
       background-color: var(--light-skin-tone);
+      position: relative;
+      cursor: pointer;
+      form {
+        button {
+          background-color: transparent !important;
+          border: none;
+        }
+      }
       .like {
+        z-index:10;
+        position: relative;
         margin-left: auto;
         filter: brightness(100);
         transition: .2s;
-        &.active, &:hover {
-          filter: none;
-        }
-      }
-      img {
-        cursor: pointer;
         &:hover {
           animation: heartHover 1s ease infinite;
+        }
+        &.active, &:hover {
+          filter: none;
         }
       }
     }

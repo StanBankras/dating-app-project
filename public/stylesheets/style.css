@@ -69,6 +69,10 @@ main {
   padding: 1rem 0;
 }
 
+#matches #match-items {
+  overflow-x: auto;
+}
+
 #matches ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -136,9 +140,18 @@ main {
   width: 100%;
   padding: 0.5rem 1rem;
   background-color: var(--light-skin-tone);
+  position: relative;
+  cursor: pointer;
+}
+
+#matches ul .hearts form button {
+  background-color: transparent !important;
+  border: none;
 }
 
 #matches ul .hearts .like {
+  z-index: 10;
+  position: relative;
   margin-left: auto;
   -webkit-filter: brightness(100);
           filter: brightness(100);
@@ -146,18 +159,14 @@ main {
   transition: .2s;
 }
 
+#matches ul .hearts .like:hover {
+  -webkit-animation: heartHover 1s ease infinite;
+          animation: heartHover 1s ease infinite;
+}
+
 #matches ul .hearts .like.active, #matches ul .hearts .like:hover {
   -webkit-filter: none;
           filter: none;
-}
-
-#matches ul .hearts img {
-  cursor: pointer;
-}
-
-#matches ul .hearts img:hover {
-  -webkit-animation: heartHover 1s ease infinite;
-          animation: heartHover 1s ease infinite;
 }
 
 #matches .slider-nav {
