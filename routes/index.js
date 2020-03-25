@@ -88,7 +88,7 @@ router.get('/chats', isAuthenticated, async (req, res, next) => {
       if(err) {
         console.error(err);
       }
-      chatList.push(db.collection('chats').findOne({ _id: chat }));
+      chatList.push(db.collection('chats').findOne({ chatNumber: chat }));
     });
     allChats = await Promise.all(chatList);
     if (allChats.length > 0) {
@@ -114,8 +114,28 @@ router.get('/chat/:id', isAuthenticated, async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
     const id = parseInt(req.params.id);
-    const chat = await db.collection('chats').findOne({ _id: id });
-    res.render('chat', { users: chat.users, messages: chat.messages, user });
+    const chat = await db.collection('chats').findOne({ chatNumber: id });
+    const otherUserId = chat.users[0] == user._id ? chat.users[1] : chat.users[0];
+    const otherUser = await db.collection('users').findOne({  _id: ObjectID(otherUserId) });
+    res.render('chat', { users: chat.users, messages: chat.messages, user, id, otherUser });
+  } catch(err) {
+    console.error(err);
+  }
+});
+
+router.post('/message', async (req, res, next) => {
+  try {
+    const userId = req.body.userId;
+    const chatId = req.body.chatId;
+    const message = req.body.message;
+    await db.collection('chats').updateOne({ 'chatNumber': parseInt(chatId) }, {
+      $push: { messages: {
+        message: message,
+        userId: userId,
+        date: new Date
+      } }
+    })
+    res.redirect('/chat/' + chatId);
   } catch(err) {
     console.error(err);
   }
@@ -166,18 +186,18 @@ async function checkMatch(userId, likedUserId) {
 // Creates a new chat in the database and links it to two users
 async function createChat(id, otherId) {
   try {
-    const lastChat = await db.collection('chats').findOne({}, { sort: { _id: -1 }, limit: 1 });
-    const chatId = lastChat === null ? 0 : lastChat._id+1;
+    const lastChat = await db.collection('chats').findOne({}, { sort: { chatNumber: -1 }, limit: 1 });
+    const chatNumber = lastChat === null ? 0 : lastChat.chatNumber+1;
     await db.collection('chats').insertOne({
-      _id: chatId, users: [id, otherId], messages: []
+      chatNumber: chatNumber, users: [id, otherId], messages: []
     });
     await db.collection('users').updateOne(
       { _id: ObjectID(id) },
-      { $push: { "chats": chatId } }
+      { $push: { "chats": chatNumber } }
     )
     await db.collection('users').updateOne(
       { _id: ObjectID(otherId) },
-      { $push: { "chats": chatId } }
+      { $push: { "chats": chatNumber } }
     )
   } catch(err) {
     console.error(err);
@@ -189,10 +209,10 @@ async function removeChat(chat) {
   try {
     const users = chat.users;
     // Delete the chat
-    await db.collection('chats').deleteOne({ _id: chat._id });
+    await db.collection('chats').deleteOne({ chatNumber: chat.chatNumber });
     // Delete chat for the users
     users.forEach(async (user) => {
-      await db.collection('users').updateOne({ _id: ObjectID(user) }, { $pull: { 'chats': chat._id } });
+      await db.collection('users').updateOne({ _id: ObjectID(user) }, { $pull: { 'chats': chat.chatNumber } });
     })
   } catch(err) {
     console.error(err);

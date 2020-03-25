@@ -1,6 +1,6 @@
 <html lang="en">
 
-<%- include('defaults/head') %>
+<!-- <%- include('defaults/head') %> -->
 
 <body>
 
@@ -18,10 +18,13 @@
             const otherUser = user.firstName === chats[i].users[0].firstName ? chats[i].users[1] : chats[i].users[0]; 
           %>
           <li class="chat-item">
-            <a href="/chat/<%= chats[i]._id %>">
+            <a href="/chat/<%= chats[i].chatNumber %>">
               <img
                 src="<%= otherUser.picture %>"
-                alt="<%= otherUser.firstName %> <%= otherUser.lastName %>">
+                alt="<%= otherUser.firstName %> <%= otherUser.lastName %>"
+                width="200px"
+                height="auto">
+                
               <div>
                 <p>Chat with <%= otherUser.firstName %>, <%= otherUser.age %></p>
                 <p class="last-message">Send a message to <%= otherUser.firstName %>!</p>

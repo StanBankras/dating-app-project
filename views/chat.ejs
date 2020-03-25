@@ -1,6 +1,8 @@
 <html lang="en">
 <%- include('defaults/head') %>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="../javascripts/chat.js"></script>   
 <body>
 
   <%- include('components/header') %>
@@ -9,38 +11,31 @@
     <article>
       <section id="messages">
         <div class="container">
-          <div class="incoming">
-            <div class="metadata">
-              <span class="author">Rick</span>
-              <span class="date">15:18</span>
-            </div>
-            <p>Message is going to be displayed here.</p>
-          </div>
-          <div class="outgoing">
-            <div class="metadata">
-              <span class="author">You</span>
-              <span class="date">15:19</span>
-            </div>
-            <p>Message is going to be displayed here.</p>
-          </div>
-          <div class="incoming">
-            <div class="metadata">
-              <span class="author">Rick</span>
-              <span class="date">15:18</span>
-            </div>
-            <p>Message is going to be displayed here.</p>
-          </div>
-          <div class="outgoing">
-            <div class="metadata">
-              <span class="author">You</span>
-              <span class="date">15:19</span>
-            </div>
-            <p>Message is going to be displayed here.</p>
-          </div>
+          <% for (let i = 0;i < messages.length;i++) { %>
+            <% if (messages[i].userId == user._id) { %>
+              <div class="outgoing">
+                <div class="metadata">
+                  <span class="author">You on</span>
+                  <span class="date"><%= messages[i].date %></span>
+                </div>
+                <p><%= messages[i].message %></p>
+              </div>            
+            <% } else { %>
+              <div class="incoming">
+                <div class="metadata">
+                  <span class="author"><%= otherUser.firstName %> on</span>
+                  <span class="date"><%= messages[i].date %></span>
+                </div>
+                <p><%= messages[i].message %></p>
+              </div>                
+            <% } %>
+          <% } %>
         </div>
-        <form class="input-field">
+        <form action="/message" method="POST" class="input-field">
           <fieldset>
-            <input type="text">
+            <input name="chatId" value="<%= id %>" type="hidden">
+            <input name="userId" value="<%= user._id %>" type="hidden">
+            <input name="message" type="text">
             <button>Send</button>
           </fieldset>
         </form>
