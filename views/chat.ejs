@@ -1,8 +1,5 @@
 <html lang="en">
 <%- include('defaults/head') %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="../javascripts/chat.js"></script>   
 <body>
 
   <%- include('components/header') %>
@@ -32,11 +29,12 @@
           <% } %>
         </div>
         <form action="/message" method="POST" class="input-field">
+          <p id="typing"></p>
           <fieldset>
-            <input name="chatId" value="<%= id %>" type="hidden">
-            <input name="userId" value="<%= user._id %>" type="hidden">
-            <input name="message" type="text">
-            <button>Send</button>
+            <input name="chatId" value="<%= id %>" type="hidden" id="chat">
+            <input name="userId" value="<%= user._id %>" type="hidden" id="user">
+            <input name="message" id="message" type="text">
+            <button id="send-button">Send</button>
           </fieldset>
         </form>
       </section>
@@ -44,6 +42,12 @@
   </main>
 
   <%- include('components/footer') %>
+  <script>
+    const user =<%-JSON.stringify(user)%>;
+    const otherUser =<%-JSON.stringify(otherUser)%>;
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+  <script src="../javascripts/chat.js"></script>   
 
 </body>
 

@@ -1,41 +1,41 @@
-// To be turned back into Javascript instead of jQuery.
-$(document).ready(function() {
-    const socket = io.connect("http://localhost:3000");
+const socket = io.connect("http://localhost:3000");
 
-    let feedback = $("#text-feedback");
-    let typing = $("#typing");
-    let changedName = $("#changed-name");
-    let message = $("#message");
-    let sendMessage = $("#send-button");
+const typing = document.querySelector("#typing");
+const message = document.querySelector("#message");
+const messages = document.querySelector('#messages .container');
+const sendMessage = document.querySelector("#send-button");
+const username = user.firstName;
 
-    let username = $("#username");
-    let changeUsername = $("#change-username");
+sendMessage.addEventListener('click', (e) => {
+    e.preventDefault();
+    socket.emit('new_message', { message: message.value, username, date: new Date });
+});
 
-    sendMessage.click(() => {
-        socket.emit('new_message', { message: message.val() });
-    });
+socket.on('new_message', (data) => {
+    message.value = '';
+    const messageSend = document.createElement('div');
+    if (data.username == username) {
+        messageSend.classList.add('outgoing');
+    } else {
+        messageSend.classList.add('incoming');
+    }
+    messageSend.innerHTML = `
+    <div class="metadata">
+        <span class="author">${ data.username == username ? 'You' : data.username } at</span>
+        <span class="date">${ data.date }</span>
+    </div>
+    <p>${ data.message }</p>
+    `;
+    messages.appendChild(messageSend);
+});
 
-    socket.on('new_message', (data) => {
-        message.val('');
-        feedback.append('<p>' + data.username + ': ' + data.message + '</p>');
-        console.log(data);
-    });
+message.addEventListener('keypress', () => {
+    socket.emit('typing', { username });
+});
 
-    changeUsername.click(() => {
-        socket.emit('change_username', { username: username.val() });
-        changedName.text('Changed name to ' + username.val());
-    });
-
-    message.bind('keypress', () => {
-        socket.emit('typing');
-    });
-
-    let timeout;
-    socket.on('typing', (data) => {
-        setTimeout(() => {
-            typing.text('');
-        }, 2000);
-        typing.text(data.username + ' is typing...');
-    });
-
-})
+socket.on('typing', (data) => {
+    setTimeout(() => {
+        typing.textContent = '';
+    }, 3000);
+    typing.textContent = data.username + ' is typing...';
+});
