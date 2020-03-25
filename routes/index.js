@@ -65,13 +65,12 @@ router.post('/like', async (req, res, next) => {
       }
     } else {
       // See if the other user already liked this user too
-      checkMatch(req.session.user, req.body.id);
+      checkMatch(req.session.user, req.body.id, res);
       // Add the liked user to the likedPersons array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.user) },
         { $push: { "likedPersons": slug(req.body.id) } }
       )
-      console.log('Liked');
       if (!req.body.js) {
         return res.redirect('/');
       }
@@ -81,6 +80,10 @@ router.post('/like', async (req, res, next) => {
     console.error(err);
   }
 });
+
+router.get('/match', (req, res, next) => {
+  res.render('match', {});
+})
 
 // Render chats
 router.get('/chats', isAuthenticated, async (req, res, next) => {
@@ -174,15 +177,14 @@ function isAuthenticated(req, res, next) {
 }
 
 // Function checks if both users liked each other
-async function checkMatch(userId, likedUserId) {
+async function checkMatch(userId, likedUserId, res) {
   try {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
     if (likedUser.likedPersons.includes(userId)) {
       createChat(userId, likedUserId);
-      console.log('It is a match!');
     }
   } catch(err) {
-    console.error(err);
+    return console.error(err);
   }
 }
 

@@ -9,6 +9,8 @@ const username = user.firstName;
 
 sendMessage.addEventListener('click', (e) => {
     e.preventDefault();
+    // Prevent users from sending empty messages
+    if (message.value == '') return;
     socket.emit('new_message', { message: message.value, username, date: new Date, userId: user._id, chatId });
 });
 

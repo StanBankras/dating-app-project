@@ -13,12 +13,11 @@ dbCallback(database => {
 dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 
 io.on('connection', (socket) => {
-  console.log('New client connected.');
   socket.username = "Anonymous";
 
   socket.on('new_message', async (data) => {
     try {
-
+      if (data.message == '') return;
       await db.collection('chats').updateOne({ 'chatNumber': parseInt(data.chatId) }, {
         $push: { messages: {
           message: data.message,
