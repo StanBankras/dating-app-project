@@ -81,10 +81,6 @@ router.post('/like', async (req, res, next) => {
   }
 });
 
-router.get('/match', (req, res, next) => {
-  res.render('match', {});
-})
-
 // Render chats
 router.get('/chats', isAuthenticated, async (req, res, next) => {
   try {

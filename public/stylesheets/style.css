@@ -161,6 +161,7 @@ main {
           filter: brightness(100);
   -webkit-transition: .2s;
   transition: .2s;
+  cursor: pointer;
 }
 
 #matches ul .hearts .like:hover {
