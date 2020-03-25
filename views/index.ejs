@@ -6,7 +6,7 @@
 
   <%- include('components/header') %>
 
-  <main>
+  <main id="main">
     <article>
       <section class="container" id="matches">
         <h1>Your matches</h1>
@@ -51,13 +51,6 @@
           </div>
         </nav>
       </section>
-      <section id="viewed-matches">
-        <div class="container">
-          <h2>Viewed matches</h2>
-          <ul>
-          </ul>
-        </div>
-      </section>
     </article>
   </main>
 
@@ -68,6 +61,7 @@
     const matches =<%-JSON.stringify(matches)%>;
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./javascripts/enhancement.js"></script>
   <script src="./javascripts/matchSlider.js"></script>
   <script src="./javascripts/likingUsers.js"></script>
 </body>
