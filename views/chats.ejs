@@ -1,6 +1,6 @@
 <html lang="en">
 
-<!-- <%- include('defaults/head') %> -->
+<%- include('defaults/head') %>
 
 <body>
 
@@ -27,7 +27,11 @@
                 
               <div>
                 <p>Chat with <%= otherUser.firstName %>, <%= otherUser.age %></p>
-                <p class="last-message">Send a message to <%= otherUser.firstName %>!</p>
+                <% if (chats[i].messages.length != 0) { %>
+                  <p class="last-message"><%= chats[i].messages[chats[i].messages.length-1].message %> - <%= chats[i].messages[chats[i].messages.length-1].date %></p>
+                <% } else { %>
+                  <p class="last-message">Send a message to <%= otherUser.firstName %>!</p>
+                <% } %>
               </div>
               <i class="material-icons arrows">arrow_forward_ios</i>
             </a>

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const slug = require('slug');
+const dateFormat = require('dateformat');
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -9,6 +10,8 @@ let db;
 dbCallback(database => {
   db = database
 });
+
+dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 
 // Edit slug so it doesn't replace spaces with '-' -- https://www.npmjs.com/package/slugify
 slug.defaults.mode ='pretty';
@@ -132,7 +135,7 @@ router.post('/message', async (req, res, next) => {
       $push: { messages: {
         message: message,
         userId: userId,
-        date: new Date
+        date: dateFormat(new Date, 'chatFormat')
       } }
     })
     res.redirect('/chat/' + chatId);
