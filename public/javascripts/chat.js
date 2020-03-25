@@ -7,6 +7,8 @@ const messages = document.querySelector('#messages .container');
 const sendMessage = document.querySelector("#send-button");
 const username = user.firstName;
 
+messages.scrollTop = messages.scrollHeight;
+
 sendMessage.addEventListener('click', (e) => {
     e.preventDefault();
     // Prevent users from sending empty messages
@@ -30,6 +32,7 @@ socket.on('new_message', (data) => {
     <p>${ data.message }</p>
     `;
     messages.appendChild(messageSend);
+    messages.scrollTop = messages.scrollHeight;
 });
 
 message.addEventListener('keypress', () => {
