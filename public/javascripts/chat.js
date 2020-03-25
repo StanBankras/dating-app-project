@@ -2,13 +2,14 @@ const socket = io.connect("http://localhost:3000");
 
 const typing = document.querySelector("#typing");
 const message = document.querySelector("#message");
+const chatId = document.querySelector("#chat").value;
 const messages = document.querySelector('#messages .container');
 const sendMessage = document.querySelector("#send-button");
 const username = user.firstName;
 
 sendMessage.addEventListener('click', (e) => {
     e.preventDefault();
-    socket.emit('new_message', { message: message.value, username, date: new Date });
+    socket.emit('new_message', { message: message.value, username, date: new Date, userId: user._id, chatId });
 });
 
 socket.on('new_message', (data) => {

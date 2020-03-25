@@ -9,7 +9,7 @@ require('dotenv').config();
 
 // Mongo setup code, obtained from the Full Driver Sample provided by MongoDB
 let db = null;
-let callback;
+const callbacks = [];
 const MongoClient = mongo.MongoClient;
 const uri = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -20,7 +20,7 @@ const server = http.createServer(app);
 // Establish connection to MongoDB database
 client.connect(() => {
   db = client.db(process.env.DB_NAME);
-  if (callback) callback(db);
+  callbacks.forEach(callback => callback(db));
   server.listen(port);
   server.on('listening', () => console.log('Listening on port ' + port));
 });
@@ -32,7 +32,7 @@ module.exports = {
         if(db) {
             cb(db)
         } else {
-            callback = cb
+            callbacks.push(cb);
         }
     },
     server // Exporting for use in websockets.js

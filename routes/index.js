@@ -137,7 +137,7 @@ router.post('/message', async (req, res, next) => {
         userId: userId,
         date: dateFormat(new Date, 'chatFormat')
       } }
-    })
+    });
     res.redirect('/chat/' + chatId);
   } catch(err) {
     console.error(err);
