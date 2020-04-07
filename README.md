@@ -48,8 +48,10 @@ __Note that the chats collection at start should be empty, as the server creates
 * Hoisting. (2020, March 9). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
 * Immukul. (2019, March 20). Prototype in JavaScript. Retrieved March 19, 2020, from https://www.geeksforgeeks.org/prototype-in-javascript/
 * JavaScript Guide. (2019, August 21). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+* Kelhini, F. (2019, September 20). Axios or fetch(): Which should you use? Retrieved April 7, 2020, from https://blog.logrocket.com/axios-or-fetch-api/
 * Handlebars.js vs EJS detailed comparison. (n.d.). Retrieved March 19, 2020, from https://www.slant.co/versus/181/184/~handlebars-js_vs_ejs
 * Marquez, S. (2018, March 15). 8 Best Practices to Write Clean HTML Code. Retrieved March 19, 2020, from https://medium.com/@sergimarquez/8-best-practices-to-write-clean-html-code-1cd407e2a7ec
 * MDN Web Docs. (n.d.). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/
+* Mozilla MDN. (2019, April 8). Progressive Enhancement. Retrieved April 7, 2020, from https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement
 * MongoDB Documentation. (n.d.). Retrieved March 19, 2020, from https://docs.mongodb.com/
-
+* Tse, T. (2017, February 15). What is Progressive Enhancement and Why Should You Care? Retrieved April 7, 2020, from https://www.shopify.com/partners/blog/what-is-progressive-enhancement-and-why-should-you-care
