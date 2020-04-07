@@ -53,5 +53,6 @@ __Note that the chats collection at start should be empty, as the server creates
 * Marquez, S. (2018, March 15). 8 Best Practices to Write Clean HTML Code. Retrieved March 19, 2020, from https://medium.com/@sergimarquez/8-best-practices-to-write-clean-html-code-1cd407e2a7ec
 * MDN Web Docs. (n.d.). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/
 * Mozilla MDN. (2019, April 8). Progressive Enhancement. Retrieved April 7, 2020, from https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement
+* Mozilla MDN. (2020, March 27). : The Script element. Retrieved April 7, 2020, from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
 * MongoDB Documentation. (n.d.). Retrieved March 19, 2020, from https://docs.mongodb.com/
 * Tse, T. (2017, February 15). What is Progressive Enhancement and Why Should You Care? Retrieved April 7, 2020, from https://www.shopify.com/partners/blog/what-is-progressive-enhancement-and-why-should-you-care
