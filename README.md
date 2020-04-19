@@ -44,7 +44,8 @@ __Note that the chats collection at start should be empty, as the server creates
 * Cosset, D. (2019, February 16). Higher-order functions in Javascript. Retrieved March 19, 2020, from https://dev.to/damcosset/higher-order-functions-in-javascript-4j8b
 * Closures. (2020, March 6). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 * ExpressJS Installation. (n.d.). Retrieved March 19, 2020, from https://expressjs.com/en/starter/installing.html
-* f. (2018, November 7). What is Progressive Enhancement, and why it matters. Retrieved March 19, 2020, from https://www.freecodecamp.org/news/what-is-progressive-enhancement-and-why-it-matters-e80c7aaf834a/
+* Engel, D. (2019, June 11). Scope vs. Context in JavaScript - Better Programming. Retrieved April 19, 2020, from https://medium.com/better-programming/scope-vs-context-in-javascript-b31818f58558
+* FreecodeCamp (2018, November 7). What is Progressive Enhancement, and why it matters. Retrieved March 19, 2020, from https://www.freecodecamp.org/news/what-is-progressive-enhancement-and-why-it-matters-e80c7aaf834a/
 * Hoisting. (2020, March 9). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
 * Immukul. (2019, March 20). Prototype in JavaScript. Retrieved March 19, 2020, from https://www.geeksforgeeks.org/prototype-in-javascript/
 * JavaScript Guide. (2019, August 21). Retrieved March 19, 2020, from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
